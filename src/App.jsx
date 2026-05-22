@@ -1,195 +1,427 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Search, MessageCircle, ShieldCheck, Truck, Sparkles, ArrowRight, Play, ShoppingBag, Users } from "lucide-react";
+import "./App.css";
 
+const WHATSAPP_LINK =
+  "https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20traer%20un%20producto";
 
-export default function TraelaLandingPage() {
+export default function App() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#090012] text-white">
-      <section className="relative min-h-screen px-6 py-6 md:px-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,#ff005c_0%,transparent_30%),radial-gradient(circle_at_80%_15%,#8b00ff_0%,transparent_35%),linear-gradient(135deg,#ff004f_0%,#d900d8_45%,#4b00ff_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,.22),transparent_18%)]" />
-        <div className="absolute inset-0 backdrop-blur-[1px]" />
+    <main className="min-h-screen bg-white text-slate-950">
+      <section className="mx-auto max-w-5xl px-6 pt-8 pb-24">
+  <nav className="sticky top-4 z-50 flex items-center justify-between rounded-full border border-white/40 bg-white/70 px-5 py-4 shadow-lg backdrop-blur-xl">
+    <div className="flex items-center gap-3">
+      <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-fuchsia-500 text-white font-black shadow-lg">
+        T
+      </div>
 
-        <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/15 bg-white/10 px-5 py-4 shadow-2xl backdrop-blur-xl">
-          <div className="flex items-center gap-3">
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-300 via-orange-500 to-fuchsia-700 shadow-lg shadow-pink-700/30">
-              <Play className="h-5 w-5 fill-white text-white" />
-            </div>
-            <span className="text-2xl font-black tracking-tight">Traela</span>
-          </div>
-          <div className="hidden items-center gap-7 text-sm font-medium text-white/75 md:flex">
-            <a href="#how">Cómo funciona</a>
-            <a href="#proof">Por qué ahora</a>
-            <a href="#waitlist">Únete</a>
-          </div>
-          <Button className="rounded-full bg-white px-5 text-[#8b00ff] hover:bg-white/90">
-            Probar ahora
-          </Button>
-        </nav>
+      <span className="text-3xl font-black tracking-tight">
+        Traela
+      </span>
+    </div>
 
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 pb-16 pt-20 md:grid-cols-[1.05fr_.95fr] md:pt-28">
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-center md:text-left"
-          >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white/85 backdrop-blur-xl">
-              <Sparkles className="h-4 w-4" />
-              AI Shopping Assistant para LATAM.
-            </div>
-            <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl lg:text-8xl">
-              Comprá cualquier producto online con ayuda de IA.
-            </h1>
-            <p className="mx-auto mt-7 max-w-2xl text-lg font-medium leading-8 text-white/78 md:mx-0 md:text-xl">
-              Mandale a Traela cualquier link, foto o producto que quieras. Nuestra IA busca las mejores opciones, compara precios, evalúa tiempos de entrega, verifica vendedores y te recomienda la compra más conveniente para vos.
+    <a
+      href={WHATSAPP_LINK}
+      target="_blank"
+      className="hidden rounded-full bg-gradient-to-r from-orange-500 to-fuchsia-500 px-7 py-4 text-sm font-black text-white shadow-xl transition hover:scale-[1.02] lg:inline-flex"
+    >
+      Decinos qué querés comprar →
+    </a>
+  </nav>
+
+  <div className="grid items-center gap-20 pt-20 lg:grid-cols-[1.1fr_.9fr]">
+    <div>
+      <div className="mb-8 inline-flex rounded-full border border-fuchsia-100 bg-fuchsia-50 px-5 py-2 text-sm font-bold text-fuchsia-600">
+        Fácil · rápido · precio final garantizado
+      </div>
+
+      <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-[-0.04em] text-slate-950 lg:text-8xl">
+        Comprá productos del mundo{" "}
+        <span className="bg-gradient-to-r from-orange-500 to-fuchsia-500 bg-clip-text text-transparent">
+          sin complicarte.
+        </span>
+      </h1>
+
+      <p className="mt-10 max-w-2xl text-xl leading-9 text-slate-500">
+        Mandanos el link por WhatsApp. Te conseguimos la mejor opción,
+        te damos el precio final y lo recibís en Paraguay sin vueltas.
+      </p>
+
+      <div className="mt-12 flex flex-col gap-5 sm:flex-row">
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
+          className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-9 py-5 text-lg font-black text-white shadow-2xl transition hover:scale-[1.02]"
+        >
+          Pedir por WhatsApp →
+        </a>
+
+        <div className="flex items-center gap-4 rounded-2xl border border-slate-100 bg-white px-6 py-4 shadow-sm">
+          <div className="flex -space-x-3">
+            <div className="h-10 w-10 rounded-full border-2 border-white bg-orange-200" />
+            <div className="h-10 w-10 rounded-full border-2 border-white bg-pink-200" />
+            <div className="h-10 w-10 rounded-full border-2 border-white bg-fuchsia-200" />
+          </div>
+
+          <div>
+            <p className="text-sm font-black text-slate-950">
+              Primeros pedidos entregados
             </p>
-            <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
-              <Button className="h-14 rounded-full bg-gradient-to-r from-pink-600 via-orange-500 to-yellow-400 px-8 text-lg font-bold shadow-2xl shadow-pink-900/40 hover:scale-[1.02]">
-                Ver cómo funciona <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" className="h-14 rounded-full border-white/25 bg-white/10 px-8 text-lg font-bold text-white backdrop-blur-xl hover:bg-white/20 hover:text-white">
-                Probar Traela
-              </Button>
-            </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 22 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="relative"
+            <p className="text-sm text-slate-500">
+              Clientes en Paraguay 🇵🇾
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
+        {[
+          ["Precio final", "Sabés exactamente cuánto vas a pagar."],
+          ["Atención real", "Hablás con personas, no bots."],
+          ["Nos encargamos", "Compramos, enviamos y resolvemos."],
+        ].map(([title, text]) => (
+          <div
+            key={title}
+            className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
           >
-            <div className="absolute -inset-8 rounded-[3rem] bg-white/20 blur-3xl" />
-            <Card className="relative overflow-hidden rounded-[2.5rem] border-white/15 bg-white/12 shadow-2xl backdrop-blur-2xl">
-              <CardContent className="p-5 md:p-7">
-                <div className="rounded-[2rem] bg-[#12001e]/70 p-4 shadow-inner">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                    <div>
-                      <p className="text-sm font-bold text-white/50">Compra asistida por IA</p>
-                      <p className="text-lg font-black">Nike Vomero Plus</p>
-                    </div>
-                    <div className="rounded-full bg-emerald-400/15 px-3 py-1 text-sm font-bold text-emerald-200">Confirmado</div>
-                  </div>
+            <h3 className="font-black text-slate-950">
+              {title}
+            </h3>
 
-                  <div className="mt-5 grid gap-4">
-                    <div className="rounded-3xl bg-white p-4 text-[#170020]">
-                      <div className="flex gap-4">
-                        <div className="flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br from-zinc-100 to-zinc-300">
-                          <ShoppingBag className="h-12 w-12 text-zinc-600" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm font-bold text-zinc-500">La IA encontró la mejor compra</p>
-                          <h3 className="mt-1 text-xl font-black">USD 115</h3>
-                          <p className="mt-2 text-sm font-semibold text-zinc-600">Incluye recomendación optimizada según precio, envío y tiempo de entrega.</p>
-                        </div>
-                      </div>
-                    </div>
+            <p className="mt-3 text-sm leading-6 text-slate-500">
+              {text}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
 
-                    <div className="grid grid-cols-2 gap-3">
-                      <Info icon={<Search />} title="Analizamos" text="Miles de opciones online." />
-                      <Info icon={<ShieldCheck />} title="Comparamos" text="Precio, tiempo y confianza." />
-                      <Info icon={<MessageCircle />} title="Te guiamos" text="Todo desde una conversación." />
-                      <Info icon={<Truck />} title="Traemos" text="Hasta tu puerta." />
-                    </div>
+    <div className="relative">
+      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-orange-200 via-pink-200 to-fuchsia-300 opacity-80 blur-3xl" />
+
+      <div className="relative mx-auto max-w-sm rounded-[3.5rem] border-[10px] border-slate-950 bg-white p-4 shadow-[0_40px_120px_rgba(0,0,0,0.18)]">
+        <div className="overflow-hidden rounded-[2.8rem] bg-[#efe7dc]">
+          <div className="flex items-center gap-3 border-b border-black/5 bg-white/70 px-6 py-5 backdrop-blur">
+            <div className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-orange-500 to-fuchsia-500 text-sm font-black text-white">
+              T
+            </div>
+
+            <div>
+              <p className="font-black text-slate-950">
+                Traela
+              </p>
+
+              <p className="text-xs text-green-600">
+                En línea
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-5 p-6">
+            <div className="ml-auto w-fit rounded-3xl bg-green-100 px-5 py-4 text-sm font-medium text-slate-800 shadow-sm">
+              Quiero traer estos AirPods Pro
+            </div>
+
+            <div className="rounded-[2rem] bg-white p-5 shadow-xl">
+              <p className="text-sm font-bold text-slate-950">
+                Ya tengo la mejor opción para vos.
+              </p>
+
+              <div className="mt-5 flex gap-4">
+                <div className="grid h-20 w-20 place-items-center rounded-2xl bg-slate-100 text-4xl">
+                  🎧
+                </div>
+
+                <div>
+                  <h3 className="font-black text-slate-950">
+                    AirPods Pro
+                  </h3>
+
+                  <div className="mt-2 space-y-1 text-sm text-slate-600">
+                    <p>Precio final: G. 701.500</p>
+                    <p>Llega en 5 a 10 días hábiles</p>
+                    <p>Incluye envío y entrega</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
+              </div>
 
-      <section id="how" className="relative bg-[#090012] px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-fuchsia-300">Cómo funciona</p>
-            <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-6xl">La forma más inteligente de comprar online en LATAM.</h2>
-          </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            <Step number="01" title="Decile a Traela qué querés" text="Un link, una foto, un screenshot o incluso una idea. Traela entiende lo que buscás." />
-            <Step number="02" title="La IA analiza internet por vos" text="Buscamos la mejor combinación entre precio, envío, tiempo de entrega y confianza." />
-            <Step number="03" title="Elegís y Traela resuelve" text="Confirmamos el pedido, coordinamos el envío y hacemos seguimiento hasta la entrega." />
-          </div>
-        </div>
-      </section>
+              <p className="mt-5 text-sm text-slate-700">
+                ¿Te los pedimos?
+              </p>
+            </div>
 
-      <section id="proof" className="bg-white px-6 py-24 text-[#13001f] md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[.8fr_1.2fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-fuchsia-600">Por qué Traela</p>
-            <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-6xl">Comprar online todavía consume demasiado tiempo.</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Proof icon={<Users />} title="Internet ya es el nuevo shopping" text="TikTok, Instagram y Pinterest generan intención. Pero comprar sigue siendo lento, manual y fragmentado." />
-            <Proof icon={<ShoppingBag />} title="La mejor compra no siempre está en una sola tienda" text="Traela analiza múltiples opciones online y recomienda la más conveniente." />
-            <Proof icon={<MessageCircle />} title="La conversación es la nueva interfaz" text="Comprar debería sentirse tan natural como hablar con alguien que sabe exactamente qué necesitás." />
-            <Proof icon={<Sparkles />} title="El futuro del ecommerce es AI commerce" text="Cada pedido hace que Traela entienda mejor qué comprar, dónde comprarlo y cómo optimizar la experiencia." />
+            <div className="ml-auto w-fit rounded-3xl bg-green-100 px-5 py-4 text-sm font-medium text-slate-800 shadow-sm">
+              Sí, traelo 🙌
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <section id="waitlist" className="relative overflow-hidden px-6 py-24 md:px-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-700 via-fuchsia-700 to-blue-700" />
-        <div className="relative mx-auto max-w-4xl rounded-[2.5rem] border border-white/20 bg-white/12 p-8 text-center shadow-2xl backdrop-blur-2xl md:p-14">
-          <h2 className="text-4xl font-black tracking-[-0.04em] md:text-6xl">Shopping impulsado por IA.</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg font-medium leading-8 text-white/80">
-            Encontrá mejores precios, mejores tiempos y decisiones más inteligentes sin perder horas buscando online.
-          </p>
-          <div className="mx-auto mt-8 flex max-w-xl flex-col gap-3 rounded-full bg-white p-2 shadow-2xl md:flex-row">
-            <input className="min-h-12 flex-1 rounded-full px-5 text-[#13001f] outline-none" placeholder="Tu WhatsApp o email" />
-            <Button className="min-h-12 rounded-full bg-[#13001f] px-7 font-bold text-white hover:bg-[#250039]">Acceso anticipado</Button>
+        <section className="mx-auto grid w-full max-w-[340px] gap-3 pb-16 md:max-w-none md:grid-cols-4 md:gap-5">
+          {[
+            ["Precio final garantizado", "Sabés cuánto vas a pagar desde el inicio. Sin costos ocultos."],
+            ["Te ayudamos a elegir", "Comparamos opciones y te recomendamos la mejor."],
+            ["Nos hacemos cargo", "Compramos, gestionamos el envío y resolvemos cualquier problema."],
+            ["Atención real por WhatsApp", "Hablás con personas reales, no con bots."],
+          ].map(([title, text]) => (
+            <div
+              key={title}
+              className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
+            >
+              <h3 className="text-lg font-black">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-500">{text}</p>
+            </div>
+          ))}
+        </section>
+              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
+          <div className="overflow-hidden rounded-[3rem] bg-gradient-to-br from-slate-950 via-slate-900 to-fuchsia-950 p-10 text-white lg:p-16">
+            <div className="max-w-3xl">
+              <div className="mb-6 inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-fuchsia-200">
+                La diferencia Traela
+              </div>
+
+              <h2 className="text-4xl font-black leading-tight lg:text-5xl">
+                No más calcular kilos, casillas ni costos ocultos.
+              </h2>
+
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300">
+                Con Traela no tenés que adivinar cuánto cuesta traer algo.
+                Mandanos el producto que querés y te respondemos con un precio
+                final claro, entrega estimada y la mejor opción disponible.
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+                <div className="rounded-2xl bg-white/10 px-5 py-4 text-sm font-semibold">
+                  Precio final garantizado
+                </div>
+
+                <div className="rounded-2xl bg-white/10 px-5 py-4 text-sm font-semibold">
+                  Atención por WhatsApp
+                </div>
+
+                <div className="rounded-2xl bg-white/10 px-5 py-4 text-sm font-semibold">
+                  Compramos por vos
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
+          <div className="text-center">
+            <div className="mb-4 inline-flex rounded-full bg-orange-50 px-4 py-2 text-sm font-bold text-orange-600">
+              Así de fácil
+            </div>
+
+            <h2 className="text-4xl font-black lg:text-5xl">
+              Comprar del exterior nunca fue tan simple.
+            </h2>
+
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-500">
+              Nos encargamos de todo para que vos solo te preocupes por elegir
+              lo que querés.
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-4">
+            {[
+              [
+                "1",
+                "Mandanos el link",
+                "Puede ser de Amazon, Nike, TikTok, Instagram o cualquier tienda.",
+              ],
+              [
+                "2",
+                "Te pasamos el precio final",
+                "Incluye producto, envío, gestión y entrega en Paraguay.",
+              ],
+              [
+                "3",
+                "Confirmás y pagás",
+                "Solo compramos cuando aprobás el pedido.",
+              ],
+              [
+                "4",
+                "Lo recibís en tu casa",
+                "Te mantenemos al tanto por WhatsApp.",
+              ],
+            ].map(([number, title, text]) => (
+              <div
+                key={title}
+                className="rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm"
+              >
+                <div className="mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-fuchsia-500 text-xl font-black text-white">
+                  {number}
+                </div>
+
+                <h3 className="text-xl font-black">{title}</h3>
+
+                <p className="mt-4 text-sm leading-7 text-slate-500">
+                  {text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+            <div>
+              <div className="mb-4 inline-flex rounded-full bg-fuchsia-50 px-4 py-2 text-sm font-bold text-fuchsia-600">
+                Productos populares
+              </div>
+
+              <h2 className="text-4xl font-black lg:text-5xl">
+                Productos que la gente ya está trayendo.
+              </h2>
+            </div>
+
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              className="hidden rounded-2xl bg-slate-950 px-6 py-4 text-sm font-bold text-white lg:inline-flex"
+            >
+              Consultar producto →
+            </a>
+          </div>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {[
+              ["🎧", "AirPods Pro", "Tecnología"],
+              ["🥤", "Stanley Cup", "Lifestyle"],,
+              ["⌚", "Apple Watch", "Lifestyle"],
+              ["🏋️", "Gym Accessories", "Fitness"],
+            ].map(([emoji, title, category]) => (
+              <div
+                key={title}
+                className="group overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="grid h-56 place-items-center bg-gradient-to-br from-orange-100 via-pink-100 to-fuchsia-100 text-7xl">
+                  {emoji}
+                </div>
+
+                <div className="p-5">
+                  <p className="text-sm font-semibold text-fuchsia-600">
+                    {category}
+                  </p>
+
+                  <h3 className="mt-2 text-2xl font-black">{title}</h3>
+
+                  <p className="mt-3 text-sm leading-6 text-slate-500">
+                    Consultá disponibilidad, precio final y fecha estimada de
+                    entrega.
+                  </p>
+
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    className="mt-6 inline-flex text-sm font-black text-slate-950"
+                  >
+                    Consultar →
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
+          <div className="mt-12 grid gap-3 lg:grid-cols-3 lg:gap-6">
+            <div className="mb-4 inline-flex rounded-full bg-orange-50 px-4 py-2 text-sm font-bold text-orange-600">
+              Clientes felices
+            </div>
+
+            <h2 className="text-4xl font-black lg:text-5xl">
+              Lo que dicen nuestros clientes.
+            </h2>
+          </div>
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            {[
+              [
+                "“Le mandé el link y en minutos ya tenía el precio final. Mucho más fácil que calcular todo yo.”",
+                "María B.",
+              ],
+              [
+                "“La mejor parte fue saber exactamente cuánto iba a pagar desde el inicio.”",
+                "Diego R.",
+              ],
+              [
+                "“Sentí que alguien realmente me ayudó durante todo el proceso.”",
+                "Ana P.",
+              ],
+            ].map(([quote, name]) => (
+              <div
+                key={name}
+                className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
+              >
+                <p className="text-lg leading-8 text-slate-700">{quote}</p>
+
+                <div className="mt-8">
+                  <p className="font-black">{name}</p>
+                  <p className="text-sm text-slate-500">Paraguay</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-[340px] pb-20 md:max-w-none">
+          <div className="overflow-hidden rounded-[3rem] bg-gradient-to-r from-orange-500 via-pink-500 to-fuchsia-600 p-10 text-white lg:p-16">
+            <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
+              <div className="max-w-2xl">
+                <div className="mb-4 inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-bold">
+                  Traela Concierge
+                </div>
+
+                <h2 className="text-4xl font-black leading-tight lg:text-5xl">
+                  Encontraste algo que querés?
+                </h2>
+
+                <p className="mt-6 text-lg leading-8 text-white/90">
+                  Mandanos el link y te respondemos con precio final, fecha
+                  estimada y la mejor opción disponible.
+                </p>
+              </div>
+
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                className="rounded-2xl bg-white px-8 py-5 text-lg font-black text-slate-950 shadow-2xl"
+              >
+                Pedir por WhatsApp →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <footer className="mx-auto w-full max-w-[340px] border-t border-slate-100 py-10 md:max-w-none">
+          <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-fuchsia-500 text-white font-black">
+                  T
+                </div>
+
+                <span className="text-2xl font-black">Traela</span>
+              </div>
+
+              <p className="mt-4 text-sm text-slate-500">
+                Accedé a productos del mundo sin complicaciones.
+              </p>
+            </div>
+
+            <div className="flex gap-8 text-sm font-semibold text-slate-500">
+              <a href={WHATSAPP_LINK}>Cómo funciona</a>
+              <a href={WHATSAPP_LINK}>Precios</a>
+              <a href={WHATSAPP_LINK}>Preguntas</a>
+              <a href={WHATSAPP_LINK}>WhatsApp</a>
+            </div>
+          </div>
+        </footer>
+
     </main>
   );
-}
-
-function Info({ icon, title, text }) {
-  return (
-    <div className="rounded-3xl bg-white/10 p-4 text-white">
-      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-2xl bg-white/15">{React.cloneElement(icon, { className: "h-5 w-5" })}</div>
-      <p className="font-black">{title}</p>
-      <p className="mt-1 text-sm font-medium text-white/60">{text}</p>
-    </div>
-  );
-}
-
-function Step({ number, title, text }) {
-  return (
-    <Card className="rounded-[2rem] border-white/10 bg-white/[0.06] text-white shadow-2xl">
-      <CardContent className="p-7">
-        <p className="text-sm font-black text-fuchsia-300">{number}</p>
-        <h3 className="mt-6 text-2xl font-black">{title}</h3>
-        <p className="mt-4 leading-7 text-white/65">{text}</p>
-      </CardContent>
-    </Card>
-  );
-}
-
-function Proof({ icon, title, text }) {
-  return (
-    <div className="rounded-[2rem] bg-zinc-50 p-6 shadow-sm">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-blue-600 text-white">{React.cloneElement(icon, { className: "h-5 w-5" })}</div>
-      <h3 className="text-xl font-black">{title}</h3>
-      <p className="mt-3 leading-7 text-zinc-600">{text}</p>
-    </div>
-  );
-}
-function Button({ children, className = "", variant, ...props }) {
-  return (
-    <button className={className} {...props}>
-      {children}
-    </button>
-  );
-}
-
-function Card({ children, className = "" }) {
-  return <div className={className}>{children}</div>;
-}
-
-function CardContent({ children, className = "" }) {
-  return <div className={className}>{children}</div>;
 }

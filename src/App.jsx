@@ -1,9 +1,11 @@
 import "./App.css";
+import { useState } from "react";
 
 const WHATSAPP_LINK =
   "https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20traer%20un%20producto";
 
 export default function App() {
+  const [search, setSearch] = useState("");
   return (
     <main className="min-h-screen bg-white text-slate-950">
       <section className="mx-auto max-w-5xl px-6 pt-8 pb-24">
@@ -34,29 +36,46 @@ export default function App() {
       </div>
 
       <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-[-0.04em] text-slate-950 lg:text-8xl">
-        Comprá productos del mundo{" "}
-        <span className="bg-gradient-to-r from-orange-500 to-fuchsia-500 bg-clip-text text-transparent">
-          sin complicarte.
-        </span>
-      </h1>
+  La nueva forma de comprar{" "}
+  <span className="bg-gradient-to-r from-orange-500 to-fuchsia-500 bg-clip-text text-transparent">
+    del mundo.
+  </span>
+</h1>
 
       <p className="mt-10 max-w-2xl text-xl leading-9 text-slate-500">
-        Mandanos el link por WhatsApp. Te conseguimos la mejor opción,
-        te damos el precio final y lo recibís en Paraguay sin vueltas.
-      </p>
+  La forma de comprar online no cambió en años. Con Traela,
+  simplemente decís qué querés y nosotros nos encargamos del resto.
+</p>
 
       <div className="mt-12 max-w-3xl">
   <div className="group flex items-center gap-4 rounded-[2rem] border border-fuchsia-200 bg-white p-4 shadow-[0_20px_60px_rgba(255,0,128,0.12)]">
     <div className="text-3xl">🔍</div>
 
     <input
-      type="text"
-      placeholder="¿Qué querés traer hoy?"
-      className="w-full bg-transparent text-xl font-semibold text-slate-900 outline-none placeholder:text-slate-400"
-    />
+  type="text"
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      const message = `Hola Traela, quiero traer: ${search}`;
+      window.open(
+        `https://wa.me/595971255083?text=${encodeURIComponent(message)}`,
+        "_blank"
+      );
+    }
+  }}
+  placeholder="¿Qué querés traer hoy?"
+  className="w-full bg-transparent text-xl font-semibold text-slate-900 outline-none placeholder:text-slate-400"
+/>
 
     <button
-      onClick={() => window.open(WHATSAPP_LINK, "_blank")}
+      onClick={() => {
+  const message = `Hola Traela, quiero traer: ${search}`;
+  window.open(
+    `https://wa.me/595971255083?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}}
       className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-orange-500 to-fuchsia-500 text-2xl text-white shadow-lg transition-transform duration-300 hover:scale-105"
     >
       →
@@ -65,19 +84,20 @@ export default function App() {
 
   <div className="mt-5 flex flex-wrap gap-3">
     {[
-      "AirPods Pro 3",
-      "Un champion para correr < $150",
-      "Stanley Quencher 40oz",
-      "iPhone 15 Pro Max",
-      "Pegá un link de Amazon",
-    ].map((item) => (
-      <button
-        key={item}
-        className="rounded-full border border-fuchsia-100 bg-white px-5 py-3 text-sm font-semibold text-fuchsia-600 shadow-sm"
-      >
-        {item}
-      </button>
-    ))}
+  "AirPods Pro 3",
+  "Un champion para correr < $150",
+  "Stanley Quencher 40oz",
+  "iPhone 15 Pro Max",
+  "Pegá un link de Amazon",
+].map((item) => (
+  <button
+    key={item}
+    onClick={() => setSearch(item)}
+    className="rounded-full border border-fuchsia-100 bg-white px-5 py-3 text-sm font-semibold text-fuchsia-600 shadow-sm transition-all duration-200 hover:scale-105 hover:border-fuchsia-300 hover:shadow-md active:scale-95"
+  >
+    {item}
+  </button>
+))}
   </div>
 </div>  
       <div className="mt-10 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">

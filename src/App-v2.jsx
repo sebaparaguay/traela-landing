@@ -45,41 +45,34 @@ export default function App() {
         te damos el precio final y lo recibís en Paraguay sin vueltas.
       </p>
 
-      <div className="mt-12 max-w-3xl">
-  <div className="group flex items-center gap-4 rounded-[2rem] border border-fuchsia-200 bg-white p-4 shadow-[0_20px_60px_rgba(255,0,128,0.12)]">
-    <div className="text-3xl">🔍</div>
+      <div className="mt-12 flex flex-col gap-5 sm:flex-row">
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
+          className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-9 py-5 text-lg font-black text-white shadow-2xl transition hover:scale-[1.02]"
+        >
+          Pedir por WhatsApp →
+        </a>
 
-    <input
-      type="text"
-      placeholder="¿Qué querés traer hoy?"
-      className="w-full bg-transparent text-xl font-semibold text-slate-900 outline-none placeholder:text-slate-400"
-    />
+        <div className="flex items-center gap-4 rounded-2xl border border-slate-100 bg-white px-6 py-4 shadow-sm">
+          <div className="flex -space-x-3">
+            <div className="h-10 w-10 rounded-full border-2 border-white bg-orange-200" />
+            <div className="h-10 w-10 rounded-full border-2 border-white bg-pink-200" />
+            <div className="h-10 w-10 rounded-full border-2 border-white bg-fuchsia-200" />
+          </div>
 
-    <button
-      onClick={() => window.open(WHATSAPP_LINK, "_blank")}
-      className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-orange-500 to-fuchsia-500 text-2xl text-white shadow-lg transition-transform duration-300 hover:scale-105"
-    >
-      →
-    </button>
-  </div>
+          <div>
+            <p className="text-sm font-black text-slate-950">
+              Primeros pedidos entregados
+            </p>
 
-  <div className="mt-5 flex flex-wrap gap-3">
-    {[
-      "AirPods Pro 3",
-      "Un champion para correr < $150",
-      "Stanley Quencher 40oz",
-      "iPhone 15 Pro Max",
-      "Pegá un link de Amazon",
-    ].map((item) => (
-      <button
-        key={item}
-        className="rounded-full border border-fuchsia-100 bg-white px-5 py-3 text-sm font-semibold text-fuchsia-600 shadow-sm"
-      >
-        {item}
-      </button>
-    ))}
-  </div>
-</div>  
+            <p className="text-sm text-slate-500">
+              Clientes en Paraguay 🇵🇾
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-10 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
         {[
           ["Precio final", "Sabés exactamente cuánto vas a pagar."],

@@ -32,7 +32,7 @@ export default function App() {
   <div className="grid items-center gap-20 pt-20 lg:grid-cols-[1.1fr_.9fr]">
     <div>
       <div className="mb-8 inline-flex rounded-full border border-fuchsia-100 bg-fuchsia-50 px-5 py-2 text-sm font-bold text-fuchsia-600">
-        Fácil · rápido · precio final garantizado
+        Fácil · rápido · sin vueltas
       </div>
 
       <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-[-0.04em] text-slate-950 lg:text-8xl">

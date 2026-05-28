@@ -212,7 +212,7 @@ const sendToWhatsApp = () => {
   </div>
 </section>
         
-              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
+              <section className="mx-auto max-w-7xl px-6">
           <div className="overflow-hidden rounded-[3rem] bg-gradient-to-br from-slate-950 via-slate-900 to-fuchsia-950 p-10 text-white lg:p-16">
             <div className="max-w-3xl">
               <div className="mb-6 inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-fuchsia-200">
@@ -235,7 +235,7 @@ const sendToWhatsApp = () => {
                 </div>
 
                 <div className="rounded-2xl bg-white/10 px-5 py-4 text-sm font-semibold">
-                  Atención por WhatsApp
+                  Atención conversacional
                 </div>
 
                 <div className="rounded-2xl bg-white/10 px-5 py-4 text-sm font-semibold">
@@ -246,17 +246,17 @@ const sendToWhatsApp = () => {
           </div>
         </section>
 
-              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
+              <section className="mx-auto max-w-7xl px-6 py-24">
           <div className="text-center">
             <div className="mb-4 inline-flex rounded-full bg-orange-50 px-4 py-2 text-sm font-bold text-orange-600">
               Así de fácil
             </div>
 
             <h2 className="text-4xl font-black lg:text-5xl">
-              Comprar del exterior nunca fue tan simple.
+              De decirlo a tenerlo.
             </h2>
 
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/70">
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-700">
               Nos encargamos de todo para que vos solo te preocupes por elegir
               lo que querés.
             </p>
@@ -264,27 +264,27 @@ const sendToWhatsApp = () => {
 
           <div className="mt-16 grid gap-6 lg:grid-cols-4">
             {[
-              [
-                "1",
-                "Mandanos el link",
-                "Puede ser de Amazon, Nike, TikTok, Instagram o cualquier tienda.",
-              ],
-              [
-                "2",
-                "Te pasamos el precio final",
-                "Incluye producto, envío, gestión y entrega en Paraguay.",
-              ],
-              [
-                "3",
-                "Confirmás y pagás",
-                "Solo compramos cuando aprobás el pedido.",
-              ],
-              [
-                "4",
-                "Lo recibís en tu casa",
-                "Te mantenemos al tanto por WhatsApp.",
-              ],
-            ].map(([number, title, text]) => (
+  [
+    "1",
+    "Decís qué querés",
+    "Contanos el producto, el uso o la ocasión. No necesitás saber exactamente cuál comprar.",
+  ],
+  [
+    "2",
+    "Traela encuentra opciones",
+    "Comparamos alternativas y elegimos la mejor opción para vos.",
+  ],
+  [
+    "3",
+    "Ves el precio final",
+    "Te mostramos costo, entrega estimada y todo incluido desde el inicio.",
+  ],
+  [
+    "4",
+    "Lo recibís en tu casa",
+    "Nos encargamos de comprar, enviar y entregar en Paraguay.",
+  ],
+].map(([number, title, text]) => (
               <div
                 key={title}
                 className="rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm"
@@ -295,7 +295,7 @@ const sendToWhatsApp = () => {
 
                 <h3 className="text-xl font-black">{title}</h3>
 
-                <p className="mt-4 text-sm leading-7 text-white/70">
+                <p className="mt-4 text-sm leading-7 text-slate-700">
                   {text}
                 </p>
               </div>
@@ -303,79 +303,60 @@ const sendToWhatsApp = () => {
           </div>
         </section>
 
-              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
-            <div>
-              <div className="mb-4 inline-flex rounded-full bg-fuchsia-50 px-4 py-2 text-sm font-bold text-fuchsia-600">
-                Productos populares
-              </div>
+              <section className="mx-auto max-w-7xl px-6 py-24">
+  <div className="max-w-3xl">
+    <div className="mb-6 inline-flex rounded-full bg-fuchsia-50 px-5 py-2 text-sm font-bold text-fuchsia-600">
+      Primeros pedidos entregados
+    </div>
 
-              <h2 className="text-4xl font-black lg:text-5xl">
-                Productos que la gente ya está trayendo.
-              </h2>
-            </div>
+    <h2 className="text-5xl font-black leading-[1.05] tracking-tight text-slate-950">
+      Productos que la gente ya está trayendo.
+    </h2>
 
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              className="hidden rounded-2xl bg-slate-950 px-6 py-4 text-sm font-bold text-white lg:inline-flex"
-            >
-              Consultar producto →
-            </a>
-          </div>
+    <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+      Desde AirPods Pro hasta Stanley Cups y Apple Watch. Ya estamos ayudando
+      a personas en Paraguay a comprar mejor, con precio final claro y entrega
+      a domicilio.
+    </p>
+  </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-            {[
-              ["🎧", "AirPods Pro", "Tecnología"],
-              ["🥤", "Stanley Cup", "Lifestyle"],,
-              ["⌚", "Apple Watch", "Lifestyle"],
-              ["🏋️", "Gym Accessories", "Fitness"],
-            ].map(([emoji, title, category]) => (
-              <div
-                key={title}
-                className="group overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="grid h-56 place-items-center bg-gradient-to-br from-orange-100 via-pink-100 to-fuchsia-100 text-7xl">
-                  {emoji}
-                </div>
+  <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-4">
+    {[
+      ["🎧", "Tecnología", "AirPods Pro", "Entregado en Asunción • 8 días"],
+      ["🥤", "Lifestyle", "Stanley Cup", "Entregado en Luque • 9 días"],
+      ["⌚", "Lifestyle", "Apple Watch", "Entregado en Asunción • 10 días"],
+      ["🏋️", "Fitness", "Gym Accessories", "Entregado en San Lorenzo • 7 días"],
+    ].map(([emoji, category, title, detail]) => (
+      <div
+        key={title}
+        className="overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
+        <div className="grid h-48 place-items-center bg-gradient-to-br from-orange-50 via-pink-50 to-fuchsia-50 text-5xl">
+          {emoji}
+        </div>
 
-                <div className="p-5">
-                  <p className="text-sm font-semibold text-fuchsia-600">
-                    {category}
-                  </p>
+        <div className="p-6">
+          <p className="text-sm font-bold text-fuchsia-600">{category}</p>
+          <h3 className="mt-3 text-2xl font-black text-slate-950">{title}</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-500">{detail}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
 
-                  <h3 className="mt-2 text-2xl font-black">{title}</h3>
+              <section className="mx-auto max-w-7xl px-6 py-24">
+         <div className="mx-auto max-w-3xl text-center">
+  <div className="mb-6 inline-flex rounded-full bg-orange-50 px-5 py-2 text-sm font-bold text-orange-600">
+    Primeros pedidos entregados
+  </div>
 
-                  <p className="mt-3 text-sm leading-6 text-white/70">
-                    Consultá disponibilidad, precio final y fecha estimada de
-                    entrega.
-                  </p>
+  <h2 className="text-4xl font-black leading-tight tracking-tight text-slate-950 lg:text-5xl">
+    Lo que dicen nuestros clientes.
+  </h2>
+</div>
 
-                  <a
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    className="mt-6 inline-flex text-sm font-black text-white"
-                  >
-                    Consultar →
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-              <section className="mx-auto w-full max-w-[340px] py-20 md:max-w-none">
-          <div className="mt-12 grid gap-3 lg:grid-cols-3 lg:gap-6">
-            <div className="mb-4 inline-flex rounded-full bg-orange-50 px-4 py-2 text-sm font-bold text-orange-600">
-              Clientes felices
-            </div>
-
-            <h2 className="text-4xl font-black lg:text-5xl">
-              Lo que dicen nuestros clientes.
-            </h2>
-          </div>
-
-          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               [
                 "“Le mandé el link y en minutos ya tenía el precio final. Mucho más fácil que calcular todo yo.”",
@@ -392,72 +373,84 @@ const sendToWhatsApp = () => {
             ].map(([quote, name]) => (
               <div
                 key={name}
-                className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
+                className="rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm"
               >
                 <p className="text-lg leading-8 text-slate-700">{quote}</p>
 
                 <div className="mt-8">
                   <p className="font-black">{name}</p>
-                  <p className="text-sm text-white/70">Paraguay</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[340px] pb-20 md:max-w-none">
+        <section className="mx-auto max-w-7xl px-4 py-2">
           <div className="overflow-hidden rounded-[3rem] bg-gradient-to-r from-orange-500 via-pink-500 to-fuchsia-600 p-10 text-white lg:p-16">
             <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
               <div className="max-w-2xl">
-                <div className="mb-4 inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-bold">
+                <div className="inline-flex rounded-full bg-white/20 px-5 py-2 text-sm font-bold text-white">
                   Traela Concierge
                 </div>
 
                 <h2 className="text-4xl font-black leading-tight lg:text-5xl">
-                  Encontraste algo que querés?
+                  ¿Qué querés comprar hoy?
                 </h2>
 
                 <p className="mt-6 text-lg leading-8 text-white/90">
-                  Mandanos el link y te respondemos con precio final, fecha
-                  estimada y la mejor opción disponible.
+                  Comprá como hablás. Decinos qué querés, nuestro asistente encuentra la mejor opción, te muestra el precio final y nosotros nos encargamos del resto.
                 </p>
               </div>
 
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
-                className="rounded-2xl bg-white px-8 py-5 text-lg font-black text-white shadow-2xl"
+                className="rounded-2xl bg-white px-8 py-5 text-lg font-black text-slate-950 shadow-2xl"
               >
-                Pedir por WhatsApp →
+                Decinos qué querés comprar →
               </a>
             </div>
           </div>
         </section>
 
-        <footer className="mx-auto w-full max-w-[340px] border-t border-slate-100 py-10 md:max-w-none">
-          <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-fuchsia-500 text-white font-black">
-                  T
-                </div>
+        <footer className="mt-24 border-t border-slate-200">
+  <div className="mx-auto max-w-7xl px-6 py-12">
 
-                <span className="text-2xl font-black">Traela</span>
-              </div>
+    <img
+      src={logo}
+      alt="Traela"
+      className="h-20 w-auto"
+    />
 
-              <p className="mt-4 text-sm text-white/70">
-                Accedé a productos del mundo sin complicaciones.
-              </p>
-            </div>
+    <p className="mt-4 max-w-md text-slate-500">
+      Una nueva forma de comprar online en Paraguay.
+      Comprá como hablás.
+    </p>
 
-            <div className="flex gap-8 text-sm font-semibold text-white/70">
-              <a href={WHATSAPP_LINK}>Cómo funciona</a>
-              <a href={WHATSAPP_LINK}>Precios</a>
-              <a href={WHATSAPP_LINK}>Preguntas</a>
-              <a href={WHATSAPP_LINK}>WhatsApp</a>
-            </div>
-          </div>
-        </footer>
+    <div className="mt-6 flex gap-6">
+      <a
+        href={WHATSAPP_LINK}
+        target="_blank"
+        className="text-slate-600 hover:text-slate-900"
+      >
+        WhatsApp
+      </a>
+
+      <a
+        href="https://instagram.com/traela.app"
+        target="_blank"
+        className="text-slate-600 hover:text-slate-900"
+      >
+        Instagram
+      </a>
+    </div>
+
+    <p className="mt-10 text-sm text-slate-400">
+      © 2026 Traela. Todos los derechos reservados.
+    </p>
+
+  </div>
+</footer>
 
     </main>
   );

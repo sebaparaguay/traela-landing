@@ -97,6 +97,29 @@ const sendToWhatsApp = () => {
             </button>
           ))}
         </div>
+        <div className="mt-8 max-w-2xl rounded-[2rem] border border-slate-100 bg-white p-6 shadow-xl shadow-slate-200/60">
+  <div className="rounded-2xl bg-slate-50 p-4">
+    <p className="text-sm font-bold text-slate-500">Usuario</p>
+    <p className="mt-2 text-lg font-semibold text-slate-950">
+      “Necesito un regalo para mi mamá por menos de $100.”
+    </p>
+  </div>
+
+  <div className="my-4 text-center text-2xl text-fuchsia-500">↓</div>
+
+  <div className="rounded-2xl bg-gradient-to-br from-orange-50 via-pink-50 to-fuchsia-50 p-4">
+    <p className="text-sm font-bold text-fuchsia-600">Traela</p>
+    <p className="mt-2 text-lg font-black text-slate-950">
+      Stanley Quencher 40oz
+    </p>
+    <p className="mt-2 text-sm text-slate-600">
+      Precio final: Gs. 298.000
+    </p>
+    <p className="text-sm text-slate-600">
+      Entrega estimada: 8 días
+    </p>
+  </div>
+</div>
         <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
 
   <div className="rounded-[28px] border border-slate-100 bg-white p-6 shadow-xl shadow-slate-200/60">

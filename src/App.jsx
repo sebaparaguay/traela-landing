@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import logo from "./assets/traela-logo.png";
 
 const WHATSAPP_LINK =
@@ -7,6 +7,15 @@ const WHATSAPP_LINK =
 
 export default function App() {
   const [search, setSearch] = useState("");
+  const videoRef = useRef(null);
+const [isMuted, setIsMuted] = useState(true);
+
+const toggleMute = () => {
+  if (!videoRef.current) return;
+
+  videoRef.current.muted = !videoRef.current.muted;
+  setIsMuted(videoRef.current.muted);
+};
 
 const sendToWhatsApp = () => {
   const text = search.trim() || "Quiero traer un AirPods Pro 3";
@@ -38,6 +47,26 @@ const sendToWhatsApp = () => {
       Decinos qué querés comprar →
     </button>
   </nav>
+  <section className="mx-auto max-w-7xl px-6 pt-8">
+  <div className="relative overflow-hidden rounded-[3rem] bg-black shadow-2xl">
+    <video
+      ref={videoRef}
+      src="/traela-intro.mp4"
+      autoPlay
+      muted={isMuted}
+      loop
+      playsInline
+      className="w-full"
+    />
+
+    <button
+      onClick={toggleMute}
+      className="absolute bottom-6 right-6 rounded-full bg-white/90 px-5 py-3 text-sm font-bold text-slate-950 shadow-xl backdrop-blur transition-all hover:scale-105"
+    >
+      {isMuted ? "Activar sonido" : "Silenciar"}
+    </button>
+  </div>
+</section>
 
   <div className="grid items-center gap-16 pt-20 lg:grid-cols-[1.05fr_.95fr]">
     <div>
@@ -234,6 +263,8 @@ const sendToWhatsApp = () => {
     </div>
   </div>
 </section>
+
+
         
               <section className="mx-auto max-w-7xl px-6">
           <div className="overflow-hidden rounded-[3rem] bg-gradient-to-br from-slate-950 via-slate-900 to-fuchsia-950 p-10 text-white lg:p-16">

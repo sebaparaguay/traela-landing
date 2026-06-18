@@ -67,6 +67,69 @@ const sendToWhatsApp = () => {
     </button>
   </div>
 </section>
+<section className="mx-auto w-full max-w-[340px] py-20 md:max-w-4xl">
+  <div className="text-center">
+    <div className="mb-4 inline-flex rounded-full bg-fuchsia-50 px-4 py-2 text-sm font-bold text-fuchsia-600">
+      Preguntas frecuentes
+    </div>
+
+    <h2 className="text-4xl font-black tracking-[-0.03em] text-slate-950 lg:text-5xl">
+      Todo lo que necesitás saber.
+    </h2>
+
+    <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-500">
+      Contanos qué querés. Traela se encarga del resto.
+    </p>
+  </div>
+
+  <div className="mt-12 space-y-4">
+    {[
+      [
+        "¿Qué hace exactamente Traela?",
+        "Nos contás qué querés comprar y nosotros buscamos la mejor opción, confirmamos el precio final, gestionamos la compra y la llevamos hasta tu puerta.",
+      ],
+      [
+        "¿Necesito tener un link?",
+        "No. Podés mandarnos un link, una foto o simplemente describir lo que estás buscando. También podemos ayudarte a elegir.",
+      ],
+      [
+        "¿Pueden encontrar productos en Paraguay también?",
+        "Sí. Buscamos opciones tanto en Paraguay como en tiendas del exterior, según disponibilidad, precio y tiempo de entrega.",
+      ],
+      [
+        "¿Cómo funciona el precio final?",
+        "Antes de comprar te mostramos un único precio final en guaraníes. Incluye el producto, el envío global, nuestra gestión y la entrega.",
+      ],
+      [
+        "¿Cuánto tarda la entrega?",
+        "Depende del producto y de dónde se encuentre. Antes de confirmar, siempre te indicamos una fecha o ventana estimada de entrega.",
+      ],
+      [
+        "¿Qué pasa si no sé exactamente qué producto quiero?",
+        "Decinos para qué lo necesitás, qué presupuesto tenés y qué preferencias son importantes para vos. Comparamos las opciones y te recomendamos la mejor.",
+      ],
+    ].map(([question, answer]) => (
+      <details
+        key={question}
+        className="group rounded-3xl border border-slate-100 bg-white px-6 shadow-sm transition hover:shadow-md"
+      >
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left">
+          <span className="text-lg font-black text-slate-950">
+            {question}
+          </span>
+
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-slate-50 text-xl font-medium text-slate-700 transition-transform duration-200 group-open:rotate-45">
+            +
+          </span>
+        </summary>
+
+        <p className="max-w-3xl border-t border-slate-100 pb-6 pt-5 leading-7 text-slate-500">
+          {answer}
+        </p>
+      </details>
+    ))}
+  </div>
+</section>
 
   <div className="grid items-center gap-16 pt-20 lg:grid-cols-[1.05fr_.95fr]">
     <div>

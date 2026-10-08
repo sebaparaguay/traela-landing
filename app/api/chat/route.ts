@@ -21,7 +21,8 @@ export async function POST(request: NextRequest) {
   const data=await upstream.json();if(data.status==='error')throw new Error('Upstream error');
   if(custom){const reply=data.reply||data.output||data.message;if(typeof reply==='string'&&reply.trim())return NextResponse.json({reply,handoff:data.handoff===true});throw new Error('Invalid conversation response');}
   const products=Array.isArray(data.products)?data.products.slice(0,3):[];
-  const reply=products.length?'Encontré estas opciones:\n\n'+products.map((p:{title?:string},i:number)=>`${i+1}. ${p.title||'Producto'}`).join('\n\n')+'\n\n¿Cuál te interesa? Para confirmar el precio final y la entrega, continuá con el equipo por WhatsApp.':image?'No pude identificar una opción con esta imagen. ¿Podés agregar el nombre o la marca del producto?':'No encontré opciones para esa búsqueda. Probá con el nombre del producto, la marca o un link.';
-  return NextResponse.json({reply,handoff:products.length>0});
+  const previews=products.map((p:{id?:string;title?:string;image_url?:string})=>({id:typeof p.id==='string'?p.id:crypto.randomUUID(),title:typeof p.title==='string'?p.title:'Producto',image_url:typeof p.image_url==='string'&&/^https:\/\//i.test(p.image_url)?p.image_url:null}));
+  const reply=products.length?'Encontré estas opciones. ¿Cuál te interesa? El equipo confirma el precio final y la entrega antes de comprar.':image?'No pude identificar una opción con esta imagen. ¿Podés agregar el nombre o la marca del producto?':'No encontré opciones para esa búsqueda. Probá con el nombre del producto, la marca o un link.';
+  return NextResponse.json({reply,products:previews,handoff:products.length>0});
  }catch{return NextResponse.json({message:'No pudimos responder ahora. Intentá de nuevo o continuá por WhatsApp.'},{status:502});}
 }

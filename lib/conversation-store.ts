@@ -1,0 +1,12 @@
+import 'server-only';
+import { createHash } from 'node:crypto';
+import { createClient } from '@supabase/supabase-js';
+export const storageConfigured=()=>Boolean(process.env.SUPABASE_URL&&process.env.SUPABASE_SERVICE_ROLE_KEY);
+export const operatorConfigured=()=>storageConfigured()&&Boolean(process.env.SUPABASE_ANON_KEY&&process.env.TRAELA_OPERATOR_EMAIL);
+export function db(){if(!storageConfigured())throw new Error('Storage not configured');return createClient(process.env.SUPABASE_URL!,process.env.SUPABASE_SERVICE_ROLE_KEY!,{auth:{persistSession:false,autoRefreshToken:false}});}
+export function authClient(){return createClient(process.env.SUPABASE_URL!,process.env.SUPABASE_ANON_KEY!,{auth:{persistSession:false,autoRefreshToken:false}});}
+export function customerHash(key:string){if(!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(key))throw new Error('Invalid conversation key');return createHash('sha256').update(key).digest('hex');}
+export function validId(id:string){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);}
+export async function receive(key:string,text:string,id:string,payload:object){if(!validId(id))throw new Error('Invalid message ID');const {data,error}=await db().rpc('traela_receive',{p_hash:customerHash(key),p_text:text,p_id:id,p_payload:payload});if(error)throw new Error('Could not save message');return data as {id:string;auto_enabled:boolean;duplicate:boolean};}
+export async function publish(id:string,reply:string,payload:object,handoff:boolean){const {data,error}=await db().rpc('traela_publish_auto',{p_id:id,p_text:reply,p_payload:payload,p_handoff:handoff});if(error)throw new Error('Could not save reply');return data as boolean;}
+export async function customerConversation(key:string){const {data:c,error}=await db().from('traela_conversations').select('id,status,auto_enabled,quote_pyg,eta_start,eta_end').eq('customer_key_hash',customerHash(key)).maybeSingle();if(error)throw new Error('Could not load conversation');if(!c)return {messages:[],conversation:null};const {data:messages,error:e}=await db().from('traela_messages').select('id,role,text,payload,created_at').eq('conversation_id',c.id).order('created_at',{ascending:false}).limit(500);if(e)throw new Error('Could not load messages');return {conversation:c,messages:(messages||[]).reverse()};}

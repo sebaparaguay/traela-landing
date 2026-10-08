@@ -5,6 +5,7 @@ The console is /operator. Without the settings below it displays a setup screen,
 1. Create a private Supabase project and apply supabase/operator.sql once. RLS is enabled; anon/authenticated roles have no table or function access. Only server routes use the service role.
 2. Create the operator user in Supabase Authentication with an email and password. Disable public account signups. Do not put credentials in GitHub or chat.
 3. Add production environment variables in the Vercel project:
+   - TRAELA_CONVERSATIONS_ENABLED=true (set only after the schema and user are ready)
    - SUPABASE_URL
    - SUPABASE_ANON_KEY (publishable/legacy anon key)
    - SUPABASE_SERVICE_ROLE_KEY (server-only secret key)

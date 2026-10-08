@@ -1,66 +1,40 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-
-type Message = { role: 'user' | 'assistant'; text: string };
-const welcome: Message = { role: 'assistant', text: 'Hola, soy Traela. ¿Qué querés comprar? Contame qué buscás o pegá un link.' };
-export default function Chat() {
-  const [messages, setMessages] = useState<Message[]>([welcome]);
-  const [input, setInput] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const session = useRef('');
-  const bottom = useRef<HTMLDivElement>(null);
-  const ready = useRef(false);
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-    try {
-      session.current = localStorage.getItem('traela_chat_session') || crypto.randomUUID();
-      localStorage.setItem('traela_chat_session', session.current);
-      const saved = JSON.parse(localStorage.getItem('traela_chat_messages') || 'null');
-      if (Array.isArray(saved) && saved.length && saved.every(m => ['user', 'assistant'].includes(m.role) && typeof m.text === 'string')) setMessages(saved.slice(-100));
-    } catch { session.current = crypto.randomUUID(); }
-    setInput(new URLSearchParams(window.location.search).get('q')?.slice(0, 2000) || '');
-    ready.current = true;
-    }, 0);
-    return () => window.clearTimeout(timer);
-  }, []);
-  useEffect(() => {
-    bottom.current?.scrollIntoView({ behavior: 'smooth' });
-    if (ready.current && messages.length > 1) try { localStorage.setItem('traela_chat_messages', JSON.stringify(messages.slice(-100))); } catch {}
-  }, [messages, busy]);
-  async function send() {
-    const text = input.trim();
-    if (!text || busy) return;
-    const next: Message[] = [...messages, { role: 'user', text }];
-    setMessages(next); setInput(''); setBusy(true); setError('');
-    try {
-      const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, session_id: session.current, history: messages.slice(-12) }) });
-      const data = await response.json();
-      if (!response.ok || typeof data.reply !== 'string') throw new Error(data.message || 'No pudimos responder. Intentá de nuevo.');
-      setMessages([...next, { role: 'assistant', text: data.reply }]);
-    } catch (e) { setError(e instanceof Error ? e.message : 'No pudimos responder.'); setInput(text); }
-    finally { setBusy(false); }
-  }
-  const whatsapp = `https://wa.me/595971255083?text=${encodeURIComponent('Hola Traela, quiero continuar esta consulta:\n' + messages.filter(m => m.role === 'user').slice(-3).map(m => m.text).join('\n'))}`;
-  return <main className="mx-auto flex h-[100dvh] max-w-3xl flex-col bg-white">
-    <header className="flex shrink-0 items-center justify-between border-b border-slate-100 px-5 py-4">
-      <Link href="/" aria-label="Volver a Traela"><img src="/traela-logo.png" alt="Traela" className="h-12 w-auto" /></Link>
-      <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-full bg-fuchsia-50 px-4 py-2 text-sm font-semibold text-fuchsia-700">Hablar con nosotros</a>
-    </header>
-    <section aria-label="Conversación" role="log" aria-live="polite" className="flex-1 overflow-y-auto px-5 py-6">
-      <p className="mb-8 text-center text-xs text-slate-500">Tu agente personal de compras</p>
-      {messages.map((message, i) => <div key={i} className={`mb-4 flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}><p className={`max-w-[85%] whitespace-pre-wrap break-words rounded-3xl px-5 py-3 text-[15px] leading-6 ${message.role === 'user' ? 'rounded-br-lg bg-gradient-to-r from-orange-500 to-fuchsia-600 text-white' : 'rounded-bl-lg bg-slate-100 text-slate-800'}`}>{message.text}</p></div>)}
-      {busy && <p role="status" className="text-sm text-slate-500">Traela está buscando…</p>}
-      <div ref={bottom} />
-    </section>
-    <footer className="shrink-0 border-t border-slate-100 px-4 pt-3 pb-[max(16px,env(safe-area-inset-bottom))]">
-      {error && <p role="alert" className="mb-3 text-sm text-red-700">{error}</p>}
-      <form onSubmit={e => { e.preventDefault(); void send(); }} className="flex items-end gap-2 rounded-3xl border border-slate-200 bg-slate-50 p-2">
-        <textarea aria-label="Tu mensaje" placeholder="Decí qué querés comprar…" value={input} maxLength={2000} rows={2} onChange={e => setInput(e.target.value)} onKeyDown={e => { if(e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void send(); } }} className="max-h-40 min-w-0 flex-1 resize-none bg-transparent px-3 py-2 text-base outline-none" />
-        <button aria-label="Enviar mensaje" disabled={busy || !input.trim()} className="rounded-full bg-gradient-to-r from-orange-500 to-fuchsia-600 px-5 py-3 font-semibold text-white disabled:opacity-40">Enviar</button>
-      </form>
-      <p className="mt-2 text-center text-[11px] text-slate-400">Confirmamos precio y entrega antes de comprar.</p>
-    </footer>
-  </main>;
+import Image from 'next/image';
+import { useEffect, useRef, useState, type ChangeEvent, type ReactNode } from 'react';
+import './chat.css';
+type Message={role:'user'|'assistant';text:string;image?:string;audio?:string;handoff?:boolean};
+type Attachment={kind:'image'|'audio';data:string;name:string;transcript?:string};
+type Recognition={lang:string;continuous:boolean;interimResults:boolean;start:()=>void;stop:()=>void;onresult:((e:{results:ArrayLike<ArrayLike<{transcript:string}>>})=>void)|null;onerror:(()=>void)|null};
+const suggestions=[['Buscar un producto','Quiero comprar algo'],['Tengo un link','Tengo un link'],['Cómo funciona','¿Cómo funciona Traela?'],['Consultar mi pedido','Consultar mi pedido']];
+function Icon({name}:{name:string}){const paths:Record<string,ReactNode>={plus:<path d="M12 5v14M5 12h14"/>,image:<><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></>,camera:<><path d="M8 6 9.5 3h5L16 6h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="4"/></>,mic:<><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></>,arrow:<path d="M12 20V4m-6 6 6-6 6 6"/>,close:<path d="m6 6 12 12M6 18 18 6"/>,new:<><path d="M12 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-7M16 3l5 5M10 14l2-5 7-7 3 3-7 7Z"/></>,stop:<rect x="5" y="5" width="14" height="14" rx="2"/>,link:<><path d="m10 14 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0M16 8l1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"/></>};return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]||paths.image}</svg>;}
+function readData(blob:Blob):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('No pudimos leer el archivo.'));reader.readAsDataURL(blob);});}
+async function optimizeImage(file:File){if(!['image/jpeg','image/png','image/webp','image/heic','image/heif'].includes(file.type))throw new Error('Usá una imagen JPG, PNG o WebP. Si es HEIC, guardala como JPG.');if(file.size>10*1024*1024)throw new Error('La imagen puede tener hasta 10 MB.');const bitmap=await createImageBitmap(file);const ratio=Math.min(1,1400/Math.max(bitmap.width,bitmap.height));const canvas=document.createElement('canvas');canvas.width=Math.round(bitmap.width*ratio);canvas.height=Math.round(bitmap.height*ratio);const ctx=canvas.getContext('2d');if(!ctx)throw new Error('No pudimos preparar la imagen.');ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();const data=canvas.toDataURL('image/jpeg',.82);if(data.length>2800000)throw new Error('La imagen sigue siendo muy grande. Probá con una más pequeña.');return data;}
+export default function Chat(){
+ const [messages,setMessages]=useState<Message[]>([]),[input,setInput]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[attachment,setAttachment]=useState<Attachment|null>(null),[menu,setMenu]=useState(false),[recording,setRecording]=useState(false),[seconds,setSeconds]=useState(0),[processing,setProcessing]=useState(false);
+ const session=useRef(''),bottom=useRef<HTMLDivElement>(null),file=useRef<HTMLInputElement>(null),camera=useRef<HTMLInputElement>(null),composer=useRef<HTMLTextAreaElement>(null),recorder=useRef<MediaRecorder|null>(null),stream=useRef<MediaStream|null>(null),recognition=useRef<Recognition|null>(null),voiceTranscript=useRef(''),timer=useRef<ReturnType<typeof setInterval>|null>(null),ready=useRef(false),mounted=useRef(true),pendingSend=useRef(false);
+ useEffect(()=>{mounted.current=true;const init=setTimeout(()=>{try{session.current=localStorage.getItem('traela_chat_session')||crypto.randomUUID();localStorage.setItem('traela_chat_session',session.current);const saved=JSON.parse(localStorage.getItem('traela_chat_messages')||'[]');if(Array.isArray(saved)&&saved.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'))setMessages(saved.filter(m=>!m.text.startsWith('Hola, soy Traela.')).slice(-100));}catch{session.current=crypto.randomUUID();}setInput(new URLSearchParams(window.location.search).get('q')?.slice(0,2000)||'');ready.current=true;},0);return()=>{clearTimeout(init);mounted.current=false;if(recorder.current?.state==='recording')recorder.current.stop();stream.current?.getTracks().forEach(t=>t.stop());recognition.current?.stop();if(timer.current)clearInterval(timer.current);};},[]);
+ useEffect(()=>{bottom.current?.scrollIntoView({behavior:'smooth'});if(ready.current)try{localStorage.setItem('traela_chat_messages',JSON.stringify(messages.slice(-100).map(m=>({role:m.role,text:m.text,handoff:m.handoff}))));}catch{}},[messages,busy]);
+ useEffect(()=>{if(composer.current){composer.current.style.height='auto';composer.current.style.height=`${Math.min(composer.current.scrollHeight,180)}px`;}},[input]);
+ async function addImage(selected?:File){setMenu(false);if(!selected)return;setProcessing(true);setError('');try{setAttachment({kind:'image',data:await optimizeImage(selected),name:selected.name});composer.current?.focus();}catch(e){setError(e instanceof Error?e.message:'No pudimos abrir la foto. Convertí la imagen a JPG e intentá de nuevo.');}finally{setProcessing(false);}}
+ function selectImage(e:ChangeEvent<HTMLInputElement>){void addImage(e.target.files?.[0]);e.target.value='';}
+ function stopRecording(){if(recorder.current?.state==='recording')recorder.current.stop();recognition.current?.stop();stream.current?.getTracks().forEach(t=>t.stop());if(timer.current)clearInterval(timer.current);setRecording(false);}
+ async function record(){setMenu(false);setError('');if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){setError('Este navegador no permite grabar audio. Podés escribir tu consulta o enviar una nota de voz por WhatsApp.');return;}try{stream.current=await navigator.mediaDevices.getUserMedia({audio:true});if(!mounted.current){stream.current.getTracks().forEach(t=>t.stop());return;}voiceTranscript.current='';const speech=window as unknown as {SpeechRecognition?:new()=>Recognition;webkitSpeechRecognition?:new()=>Recognition};const Constructor=speech.SpeechRecognition||speech.webkitSpeechRecognition;if(Constructor){const sr=new Constructor();sr.lang='es-PY';sr.continuous=true;sr.interimResults=false;sr.onresult=e=>{voiceTranscript.current=Array.from(e.results).map(r=>r[0].transcript).join(' ');};sr.onerror=()=>{};recognition.current=sr;try{sr.start();}catch{}}
+ const types=['audio/webm;codecs=opus','audio/mp4','audio/webm'];const mime=types.find(t=>MediaRecorder.isTypeSupported(t));const mr=new MediaRecorder(stream.current,mime?{mimeType:mime}:undefined);recorder.current=mr;const chunks:Blob[]=[];mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=async()=>{if(!mounted.current)return;try{const blob=new Blob(chunks,{type:mr.mimeType});if(!blob.size)throw new Error('No se grabó audio. Intentá de nuevo.');const data=await readData(blob);if(data.length>2800000)throw new Error('La nota es muy larga. Grabá hasta 60 segundos.');setAttachment({kind:'audio',data,name:'Nota de voz',transcript:voiceTranscript.current});if(voiceTranscript.current)setInput(voiceTranscript.current.slice(0,2000));}catch(e){setError(e instanceof Error?e.message:'No pudimos guardar el audio.');}};mr.start();setSeconds(0);setRecording(true);let elapsed=0;timer.current=setInterval(()=>{elapsed++;setSeconds(elapsed);if(elapsed>=60)stopRecording();},1000);
+ }catch{stream.current?.getTracks().forEach(t=>t.stop());setError('No pudimos acceder al micrófono. Revisá el permiso del navegador o escribí tu consulta.');}}
+ async function send(value?:string){const text=(value??input).trim(),media=attachment;if((!text&&!media)||busy||recording||processing||pendingSend.current)return;pendingSend.current=true;setMenu(false);setBusy(true);setError('');const previous=messages;const next:Message[]=[...previous,{role:'user',text:text||(media?.kind==='image'?'Imagen enviada':'Nota de voz'),image:media?.kind==='image'?media.data:undefined,audio:media?.kind==='audio'?media.data:undefined}];setMessages(next);setInput('');setAttachment(null);try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,session_id:session.current,history:previous.slice(-12).map(m=>({role:m.role,text:m.text})),image_url:media?.kind==='image'?media.data:undefined,audio_data:media?.kind==='audio'&&!text?media.data:undefined})});const data=await response.json();if(!response.ok||typeof data.reply!=='string')throw new Error(data.message||'No pudimos responder. Intentá de nuevo.');setMessages([...next,{role:'assistant',text:data.reply,handoff:data.handoff}]);}catch(e){setMessages(previous);setInput(text);setAttachment(media);setError(e instanceof Error?e.message:'No pudimos responder.');}finally{setBusy(false);pendingSend.current=false;composer.current?.focus();}}
+ function newChat(){if(busy||recording)return;setMessages([]);setInput('');setAttachment(null);setError('');setMenu(false);session.current=crypto.randomUUID();try{localStorage.setItem('traela_chat_session',session.current);localStorage.removeItem('traela_chat_messages');}catch{}composer.current?.focus();}
+ const whatsapp=`https://wa.me/595971255083?text=${encodeURIComponent('Hola Traela, quiero continuar esta consulta:\n'+messages.filter(m=>m.role==='user').slice(-4).map(m=>m.text).join('\n'))}`;
+ return <main className="traela-chat" onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();if(!busy&&!recording)void addImage(e.dataTransfer.files[0]);}}>
+  <header className="chat-header"><Link href="/" className="chat-brand" aria-label="Volver a Traela"><span className="chat-brand-icon"><Image src="/favicon.png" alt="" width={64} height={64}/></span>Traela<span className="chat-label">Tu agente de compras</span></Link><div className="header-actions"><button onClick={newChat} disabled={busy||recording} className="icon-button" aria-label="Nueva conversación" title="Nueva conversación"><Icon name="new"/></button><a href={whatsapp} target="_blank" rel="noopener noreferrer" className="human-link">Hablar con nosotros <span aria-hidden="true">↗</span></a></div></header>
+  <section className={`chat-conversation ${messages.length?'':'empty'}`} role="log" aria-label="Conversación" aria-live="polite">
+   {!messages.length?<div className="chat-welcome"><p className="welcome-kicker">COMPRA COMO HABLÁS</p><h1>¿Qué querés comprar?</h1><p>Contame qué buscás, pegá un link<br className="mobile-only"/> o mostrame una foto.</p><div className="suggestions">{suggestions.map(([label,value],i)=><button key={label} disabled={busy||recording||processing} onClick={()=>void send(value)}><Icon name={['image','link','plus','new'][i]}/>{label}</button>)}</div></div>:<div className="message-list">{messages.map((m,i)=><article key={i} className={`chat-message ${m.role}`}><div className="message-role">{m.role==='assistant'?<><span className="assistant-dot"/>Traela</>:'Vos'}</div><div className="message-content">{m.image&&<Image unoptimized src={m.image} alt="Imagen enviada" width={400} height={300} className="message-image"/>}{m.audio&&<audio controls src={m.audio} aria-label="Nota de voz enviada"/>}{m.text&&<p>{m.text}</p>}{m.handoff&&<a className="handoff-link" href={whatsapp} target="_blank" rel="noopener noreferrer">Continuar con el equipo por WhatsApp ↗</a>}</div></article>)}{busy&&<div className="reply-status" role="status"><span/><span/><span/>Traela está respondiendo</div>}<div ref={bottom}/></div>}
+  </section>
+  <footer className="chat-footer"><div className="composer-container">{error&&<p className="chat-error" role="alert">{error}</p>}{processing&&<p className="media-status" role="status">Preparando imagen…</p>}
+   {attachment&&<div className="attachment-preview">{attachment.kind==='image'?<Image unoptimized src={attachment.data} alt="Vista previa de la imagen" width={80} height={80}/>:<div><audio controls src={attachment.data} aria-label="Escuchar nota de voz"/><p>{input.trim()?'Se enviará el texto junto con tu consulta.':'La nota de voz necesita transcripción; también podés escribirla abajo.'}</p></div>}<button className="icon-button" onClick={()=>setAttachment(null)} aria-label="Quitar adjunto"><Icon name="close"/></button></div>}
+   <form className="chat-composer" onSubmit={e=>{e.preventDefault();void send();}}><textarea ref={composer} aria-label="Tu mensaje" placeholder="Preguntá o contame qué querés comprar…" rows={1} value={input} maxLength={2000} onChange={e=>setInput(e.target.value)} onPaste={e=>{const item=Array.from(e.clipboardData.files).find(f=>f.type.startsWith('image/'));if(item&&!busy&&!recording){e.preventDefault();void addImage(item);}}} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.nativeEvent.isComposing){e.preventDefault();void send();}if(e.key==='Escape')setMenu(false);}}/>
+    <div className="composer-toolbar"><div className="attachment-controls"><div className="add-menu-wrap"><button type="button" className="icon-button" aria-label="Agregar archivo" aria-expanded={menu} aria-controls="attachment-menu" disabled={busy||recording||processing} onClick={()=>setMenu(!menu)}><Icon name="plus"/></button>{menu&&<div id="attachment-menu" className="attachment-menu"><button type="button" onClick={()=>file.current?.click()}><Icon name="image"/>Agregar imagen</button><button type="button" onClick={()=>camera.current?.click()}><Icon name="camera"/>Tomar una foto</button><button type="button" onClick={()=>void record()}><Icon name="mic"/>Grabar nota de voz</button></div>}</div><button type="button" className="icon-button camera-shortcut" aria-label="Tomar una foto" title="Tomar una foto" disabled={busy||recording||processing} onClick={()=>camera.current?.click()}><Icon name="camera"/></button><span className="composer-hint">Texto, links o imágenes</span></div><div className="send-controls">{recording?<button type="button" className="record-stop" onClick={stopRecording}><Icon name="stop"/>Terminar · {seconds}s</button>:<button type="button" className="icon-button" aria-label="Grabar nota de voz" title="Grabar nota de voz" disabled={busy||processing} onClick={()=>void record()}><Icon name="mic"/></button>}<button className="send-button" aria-label="Enviar mensaje" disabled={busy||recording||processing||(!input.trim()&&!attachment)}><Icon name="arrow"/></button></div></div>
+   </form><p className="composer-note">El equipo confirma el precio final y la fecha de entrega antes de comprar.</p></div></footer>
+  <input ref={file} type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" hidden onChange={selectImage}/><input ref={camera} type="file" accept="image/*" capture="environment" hidden onChange={selectImage}/>
+ </main>;
 }

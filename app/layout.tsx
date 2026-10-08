@@ -13,6 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [{ url: "/favicon.png?v=traela-2", type: "image/png" }],
+    shortcut: "/favicon.png?v=traela-2",
+    apple: "/favicon.png?v=traela-2",
+  },
   title: "Traela — Compra como hablás",
   description: "Tu agente personal de compras en Paraguay.",
 };

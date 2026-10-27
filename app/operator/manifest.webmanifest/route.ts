@@ -1,0 +1,1 @@
+export function GET(){return Response.json({id:'/operator',name:'Traela Operator',short_name:'Traela',start_url:'/operator',scope:'/operator',display:'standalone',background_color:'#f8f7f5',theme_color:'#f8f7f5',icons:[{src:'/favicon.png',sizes:'1200x1200',type:'image/png'}]},{headers:{'Content-Type':'application/manifest+json','Cache-Control':'public, max-age=3600'}});}

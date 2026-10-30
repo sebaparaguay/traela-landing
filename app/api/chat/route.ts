@@ -2,10 +2,14 @@ import { after, NextRequest, NextResponse } from 'next/server';
 import { storageConfigured,receive,publish,customerConversation } from '../../../lib/conversation-store';
 import { approvedReply, operatingRules, type Turn } from '../../../lib/traela-knowledge';
 import { notifyOperator } from '../../../lib/push';
+import {searchProducts} from '../../../lib/search-service';
+import {resolveSearchQuery} from '../../../lib/product-search';
+export const maxDuration=40;
 export async function POST(request: NextRequest) {
+ const started=performance.now();
  let stored:{id:string;auto_enabled:boolean;duplicate:boolean}|null=null;
  let key='';let notificationKind:'message'|'attention'|'quote'='message';
- const finish=async(payload:{reply:string;handoff?:boolean;products?:unknown[]})=>{if(stored){if(payload.handoff)payload.reply=payload.reply.replace('Todavía no se envió una solicitud al equipo desde este chat.','La consulta quedó en la bandeja del equipo.').replace('El equipo confirma el precio final y la entrega por WhatsApp.','El equipo confirmará el precio final y la entrega por acá.').replace('Podés continuar por WhatsApp para que revisemos el estado.','El equipo revisará tu consulta y te responderá por acá.');if(payload.handoff&&notificationKind!=='quote')notificationKind='attention';const sent=await publish(stored.id,payload.reply,{products:payload.products||[],handoff:payload.handoff||false},payload.handoff||false);return NextResponse.json({...payload,pending:!sent,...await customerConversation(key)});}return NextResponse.json(payload);};
+ const finish=async(payload:{reply:string;handoff?:boolean;products?:unknown[]})=>{if(stored){if(payload.handoff)payload.reply=payload.reply.replace('Todavía no se envió una solicitud al equipo desde este chat.','La consulta quedó en la bandeja del equipo.').replace('El equipo confirma el precio final y la entrega por WhatsApp.','El equipo confirmará el precio final y la entrega por acá.').replace('Podés continuar por WhatsApp para que revisemos el estado.','El equipo revisará tu consulta y te responderá por acá.');if(payload.handoff&&notificationKind!=='quote')notificationKind='attention';const sent=await publish(stored.id,payload.reply,{products:payload.products||[],handoff:payload.handoff||false},payload.handoff||false);return NextResponse.json({...payload,pending:!sent,...await customerConversation(key)},{headers:{'Server-Timing':`app;dur=${Math.round(performance.now()-started)}`}});}return NextResponse.json(payload,{headers:{'Server-Timing':`app;dur=${Math.round(performance.now()-started)}`}});};
  try {
   const body=await request.json();
   const message=typeof body.message==='string'?body.message.trim():'';
@@ -18,18 +22,19 @@ export async function POST(request: NextRequest) {
   const custom=process.env.TRAELA_CHAT_WEBHOOK_URL;
   if(audio&&!message&&!custom&&stored)return await finish({reply:'Recibimos tu nota de voz. El equipo la revisará y te responderá por acá.',handoff:true});
   if(audio&&!message&&!custom) return NextResponse.json({message:'La transcripción de notas de voz todavía no está conectada. Escribí tu consulta o mandanos el audio por WhatsApp.'},{status:422});
-  const approved=!image&&!audio?approvedReply(message,history):null;
+  const searchQuery=resolveSearchQuery(message,history);
+  const approved=!image&&!audio&&searchQuery===message?approvedReply(message,history):null;
   if(approved) return await finish(approved);
-  const upstream=await fetch(custom||'https://traela.app.n8n.cloud/webhook/search',{
-   method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',signal:AbortSignal.timeout(25000),
-   body:JSON.stringify({message,query:message,image_url:image,audio_data:custom?audio:'',history,system_prompt:operatingRules,session_id:typeof body.session_id==='string'?body.session_id.slice(0,100):crypto.randomUUID(),locale:'es-PY',currency:'PYG'}),
-  });
-  if(!upstream.ok) throw new Error('Upstream unavailable');
-  const data=await upstream.json();if(data.status==='error')throw new Error('Upstream error');
-  if(custom){const reply=data.reply||data.output||data.message;if(typeof reply==='string'&&reply.trim())return await finish({reply,handoff:data.handoff===true});throw new Error('Invalid conversation response');}
-  const products=Array.isArray(data.products)?data.products.slice(0,3):[];
-  const previews=products.map((p:{id?:string;title?:string;image_url?:string})=>({id:typeof p.id==='string'?p.id:crypto.randomUUID(),title:typeof p.title==='string'?p.title:'Producto',image_url:typeof p.image_url==='string'&&/^https:\/\//i.test(p.image_url)?p.image_url:null}));
-  const reply=products.length?'Encontré estas opciones. ¿Cuál te interesa? El equipo confirma el precio final y la entrega antes de comprar.':image?'No pude identificar una opción con esta imagen. ¿Podés agregar el nombre o la marca del producto?':'No encontré opciones para esa búsqueda. Probá con el nombre del producto, la marca o un link.';
-  return await finish({reply,products:previews,handoff:products.length>0});
+  if(custom){
+   const upstream=await fetch(custom,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',signal:AbortSignal.timeout(28000),body:JSON.stringify({message,query:message,image_url:image,audio_data:audio,history,system_prompt:operatingRules,session_id:typeof body.session_id==='string'?body.session_id.slice(0,100):crypto.randomUUID(),locale:'es-PY',currency:'PYG'})});
+   if(!upstream.ok)throw new Error('Conversation provider unavailable');
+   const data=await upstream.json();const reply=data.reply||data.output||data.message;
+   if(typeof reply!=='string'||!reply.trim())throw new Error('Invalid conversation response');
+   return await finish({reply,handoff:data.handoff===true});
+  }
+  const result=await searchProducts(searchQuery,image);
+  const products=result.products.slice(0,5);
+  const reply=products.length?'Encontré estas opciones ordenadas por coincidencia con tu búsqueda. Abrí una para ver sus detalles. El equipo confirma el precio final antes de comprar.':image?'No pude identificar una opción con esta imagen. ¿Podés agregar el nombre o la marca?':result.candidate_count?'Los resultados disponibles no coinciden con el modelo o la variante que pediste. Probá ajustar la búsqueda o pasanos un link.':'No encontré opciones. Probá con el nombre del producto, la marca o un link.';
+  return await finish({reply,products,handoff:false});
  }catch{if(stored){try{return await finish({reply:'No pude completar la búsqueda ahora. El equipo revisará tu consulta y te responderá por acá.',handoff:true});}catch{}}return NextResponse.json({message:'No pudimos responder ahora. Intentá de nuevo o continuá por WhatsApp.'},{status:502});}
 }

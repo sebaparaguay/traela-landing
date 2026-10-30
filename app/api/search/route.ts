@@ -7,6 +7,9 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    if (typeof body.query !== "string" || body.query.length > 1500 || (body.image_url && (typeof body.image_url !== "string" || body.image_url.length > 2800000 || !/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(body.image_url)))) {
+      return NextResponse.json({message: "Enviá una búsqueda o una imagen válida."}, {status:400});
+    }
     const response = await fetch(N8N_SEARCH_URL, {
       method: "POST",
       headers: {
@@ -20,16 +23,17 @@ export async function POST(request: NextRequest) {
         currency: body.currency || "PYG",
       }),
       cache: "no-store",
+      signal: AbortSignal.timeout(25000),
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
+      await response.text();
 
       return NextResponse.json(
         {
           status: "error",
           message: "Traela search failed.",
-          details: errorText,
+
         },
         { status: response.status }
       );

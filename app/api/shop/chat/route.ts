@@ -8,7 +8,7 @@ export async function POST(req:NextRequest){
  const key=process.env.AI_GATEWAY_API_KEY;
  const oidc=process.env.VERCEL_OIDC_TOKEN;
  if(!key&&!oidc)return NextResponse.json({error:"AI_NOT_CONFIGURED",message:"La inteligencia artificial todavía no está configurada."},{status:503});
- const model=process.env.AI_GATEWAY_MODEL||"openai/gpt-6-astra";
+ const model=process.env.AI_GATEWAY_MODEL;\n if(!model)return NextResponse.json({error:"MODEL_NOT_CONFIGURED",message:"Configurá AI_GATEWAY_MODEL con un identificador válido de Vercel AI Gateway."},{status:503});
  try{
  const res=await fetch("https://ai-gateway.vercel.sh/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+(key||oidc)},body:JSON.stringify({model,max_tokens:650,messages:[{role:"system",content:"Sos Traela, un comprador personal experto para clientes de Paraguay. Usá español paraguayo con voseo, claridad y calidez. Entendé primero el uso, presupuesto, restricciones y prioridades. Hacé como máximo dos preguntas relevantes por turno. Explicá ventajas y compromisos honestamente. Nunca inventes precios, disponibilidad, opiniones verificadas ni fechas de entrega. No afirmes que investigaste productos en vivo si no recibiste resultados de una herramienta. No ejecutes compras ni prometas cotizaciones finales. Sé conciso."},...messages]}),signal:AbortSignal.timeout(25000)});
  const json=await res.json();

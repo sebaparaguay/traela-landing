@@ -11,9 +11,9 @@ export async function GET(req:NextRequest){
  if(source==="amazon"){params.set("amazon_domain","amazon.com")}else{params.set("gl","us");params.set("hl","en")}
  const response=await fetch("https://serpapi.com/search.json?"+params,{cache:"no-store",signal:AbortSignal.timeout(18000)});
  const data=await response.json();
- if(!response.ok||data.error)return NextResponse.json({error:"SEARCH_FAILED",message:"No pudimos completar la búsqueda."},{status:502});
+ if(!response.ok||data.error)return NextResponse.json({error:"SEARCH_FAILED",message:typeof data.error==="string"?data.error.slice(0,250):"El proveedor rechazó la búsqueda.",providerStatus:response.status},{status:502});
  const raw=source==="amazon"?(data.organic_results||[]):(data.shopping_results||[]);
  const products=raw.slice(0,12).map((p:Record<string,unknown>)=>({id:String(p.asin||p.product_id||p.position||""),title:String(p.title||""),image:typeof p.thumbnail==="string"?p.thumbnail:typeof p.image==="string"?p.image:null,price:typeof p.price==="string"?p.price:null,rating:typeof p.rating==="number"?p.rating:null,link:typeof p.link==="string"&&p.link.startsWith("https://")?p.link:null,source:source==="amazon"?"Amazon":"Google Shopping"})).filter((p:{title:string})=>p.title);
  return NextResponse.json({query,source,products,live:true},{headers:{"Cache-Control":"private, max-age=60"}});
- }catch{return NextResponse.json({error:"SEARCH_UNAVAILABLE",message:"La búsqueda no respondió a tiempo."},{status:504})}
+ }catch(e){console.error("shop-search-failure",e instanceof Error?e.message:"unknown");return NextResponse.json({error:"SEARCH_UNAVAILABLE",message:"No se pudo contactar a SerpAPI. Revisá los registros de Vercel."},{status:504})}
 }

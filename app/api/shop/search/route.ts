@@ -7,8 +7,8 @@ export async function GET(req:NextRequest){
  const source=req.nextUrl.searchParams.get("source")==="google"?"google_shopping":"amazon";
  if(query.length<2)return NextResponse.json({error:"INVALID_QUERY"},{status:400});
  try{
- const params=new URLSearchParams({engine:source,q:query,api_key:key});
- if(source==="amazon"){params.set("amazon_domain","amazon.com")}else{params.set("gl","us");params.set("hl","en")}
+ const params=new URLSearchParams({engine:source,api_key:key});
+ if(source==="amazon"){params.set("k",query);params.set("amazon_domain","amazon.com")}else{params.set("q",query);params.set("gl","us");params.set("hl","en")}
  const response=await fetch("https://serpapi.com/search.json?"+params,{cache:"no-store",signal:AbortSignal.timeout(18000)});
  const data=await response.json();
  if(!response.ok||data.error)return NextResponse.json({error:"SEARCH_FAILED",message:typeof data.error==="string"?data.error.slice(0,250):"El proveedor rechazó la búsqueda.",providerStatus:response.status},{status:502});

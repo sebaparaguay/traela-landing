@@ -63,6 +63,24 @@ export default function Landing() {
       <div className="clarity-floating"><span aria-hidden="true">✓</span> Así de simple.</div>
     </div>
   </section>
+  <section className="discover-section" aria-labelledby="discover-title">
+    <div className="discover-inner">
+      <div className="discover-heading"><p className="eyebrow">¿QUÉ TENÉS EN MENTE?</p><h2 id="discover-title">Lo que quieras.<br/><span>En un mensaje.</span></h2><p>Desde algo que viste en internet hasta eso que no encontrás en Paraguay.</p></div>
+      <div className="discover-grid">
+        {[
+          {name:"Esas zapatillas.",category:"Running y deporte",symbol:"👟",style:"running",message:"Hola Traela, quiero comprar unas zapatillas deportivas."},
+          {name:"Esos auriculares.",category:"Tecnología",symbol:"🎧",style:"tech",message:"Hola Traela, quiero comprar unos auriculares."},
+          {name:"Tu rutina favorita.",category:"Belleza y cuidado",symbol:"🧴",style:"beauty",message:"Hola Traela, quiero comprar productos de belleza y cuidado."},
+          {name:"Ese regalo perfecto.",category:"Regalos y más",symbol:"🎁",style:"gifts",message:"Hola Traela, necesito ayuda para elegir y comprar un regalo."}
+        ].map((item)=><a className="discover-card" key={item.style} href={`https://wa.me/595971255083?text=${encodeURIComponent(item.message)}`} target="_blank" rel="noopener noreferrer" aria-label={`Consultar por WhatsApp: ${item.category}`}>
+          <div className={`discover-visual discover-${item.style}`}><span className="discover-object" aria-hidden="true">{item.symbol}</span><span className="discover-card-arrow" aria-hidden="true">↗</span></div>
+          <div className="discover-card-copy"><h3>{item.name}</h3><p>{item.category}</p></div>
+        </a>)}
+      </div>
+      <div className="discover-bottom"><p>¿No sabés exactamente cuál elegir? También te ayudamos con eso.</p><a href="https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20que%20me%20ayuden%20a%20encontrar%20un%20producto." target="_blank" rel="noopener noreferrer">Contanos qué buscás <span aria-hidden="true">↗</span></a></div>
+      <p className="discover-note">Ejemplos de lo que podés pedir. Disponibilidad y precio sujetos a confirmación.</p>
+    </div>
+  </section>
   <section className="faq-section" aria-labelledby="faq-title"><p className="eyebrow">PREGUNTAS FRECUENTES</p><h2 id="faq-title">Todo claro.<br/>Desde el principio.</h2><div className="faq-list">{questions.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
   <section className="closing-section"><Brand/><h2>¿Qué querés<br/>comprar hoy?</h2><Start dark/><p>Precios en guaraníes. Pago vía transferencia bancaria.</p></section>
   <footer className="landing-footer"><div className="footer-box"><div className="footer-about"><Brand small/><h3>Compra como hablás.</h3><p>Tu agente personal de compras.<br/>Hecho para Paraguay.</p><Start dark/></div><div className="footer-links"><h4>Traela</h4><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">Empezar a comprar</a><a href="#como-funciona">Cómo funciona</a><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href="https://instagram.com/traela.app" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div><div className="footer-links"><h4>Información</h4><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos</a><a href="/eliminacion-datos.html">Eliminación de datos</a></div><p className="footer-copyright">© {new Date().getFullYear()} Traela. Todos los derechos reservados.</p></div><div className="footer-wordmark" aria-hidden="true">Traela</div></footer>

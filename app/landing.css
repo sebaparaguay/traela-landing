@@ -103,3 +103,11 @@
 .persona-landing .brand-symbol{width:36px;height:36px;overflow:visible;flex-shrink:0}
 .persona-landing .brand-symbol img{position:static;width:36px;height:36px;object-fit:contain;max-width:100%}
 .persona-landing .landing-brand{font-weight:800;letter-spacing:-.055em}
+
+
+/* Full-bleed wallpaper treatment based on the supplied Traela poster */
+.persona-landing .landing-hero{background:#210519!important}
+.persona-landing .landing-hero::before{background-image:url('/traela-pattern.svg')!important;background-size:410px 307px!important;background-repeat:repeat!important;opacity:.88!important;filter:saturate(1.4)}
+.persona-landing .landing-hero::after{background:radial-gradient(ellipse at 55% 50%,#28001c22 0%,#21051955 85%)!important}
+.persona-landing .hero-copy{background:radial-gradient(ellipse,#210519d9 0%,#21051977 62%,transparent 85%);border-radius:36px;padding:32px 8px}
+@media(max-width:640px){.persona-landing .landing-hero::before{background-size:310px 233px!important;opacity:.65!important}.persona-landing .hero-copy{padding:18px 4px}}

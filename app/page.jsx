@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import './landing.css';
 
-function Brand({small=false}) { return <span className={`landing-brand ${small ? 'small' : ''}`}><span className="brand-symbol"><Image src="/favicon.png" alt="" width={64} height={64}/></span><span>Traela</span></span>; }
+function Brand({small=false}) { return <span className={`landing-brand ${small ? 'small' : ''}`}><span className="brand-symbol"><Image src="/traela-logo-new.svg" alt="" width={64} height={64}/></span><span>Traela</span></span>; }
 function Start({dark=false}) {return <Link className={`start-button ${dark ? 'dark' : ''}`} href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer"><span className="button-chat" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 2v-10a9 9 0 0 1 18 0Z" fill="currentColor"/><path d="M7 11h7M7 14h5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg></span>Empezar a comprar<svg className="button-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>;}
 const questions = [
  ['¿Qué hace Traela?', 'Nos contás qué querés comprar. Buscamos opciones, confirmamos el precio final y coordinamos la compra y la entrega en Paraguay.'],

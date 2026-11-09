@@ -98,3 +98,8 @@
 .persona-landing .intro-section .eyebrow{color:#dc007f}
 .persona-landing .closing-section .start-button,.persona-landing .footer-about .start-button{color:white}
 @media(max-width:640px){.persona-landing .landing-hero{background-color:#210619}.persona-landing .landing-hero::before{background-size:390px 293px;opacity:.5}.persona-landing .hero-copy h1{font-size:clamp(36px,9vw,48px);letter-spacing:-.045em}.persona-landing .hero-copy{position:relative;z-index:1}}
+
+/* Updated icon: show full gradient speech bubble without legacy favicon crop */
+.persona-landing .brand-symbol{width:36px;height:36px;overflow:visible;flex-shrink:0}
+.persona-landing .brand-symbol img{position:static;width:36px;height:36px;object-fit:contain;max-width:100%}
+.persona-landing .landing-brand{font-weight:800;letter-spacing:-.055em}

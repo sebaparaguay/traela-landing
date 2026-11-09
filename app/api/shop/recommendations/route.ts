@@ -1,0 +1,14 @@
+import {NextRequest,NextResponse} from "next/server";
+export const runtime="nodejs";
+type P={id:string;title:string;image:string|null;price:string|null;rating:number|null;link:string|null;source:string;score:number;reason:string};
+const topics=[{key:"running",query:"running shoes",terms:["running","nike","adidas","asics","brooks","hoka","garmin","shoe"]},{key:"technology",query:"wireless headphones",terms:["headphone","apple","sony","wireless","laptop","macbook","audio"]},{key:"home",query:"coffee maker",terms:["coffee","home","kitchen","maker","espresso"]},{key:"fitness",query:"fitness accessories",terms:["fitness","gym","protein","workout","training"]}];
+function relevance(title:string,terms:string[]){const t=title.toLowerCase();return terms.reduce((n,w)=>n+(t.includes(w)?1:0),0)}
+export async function GET(req:NextRequest){
+ const key=process.env.SERPAPI_API_KEY;if(!key)return NextResponse.json({message:"Recomendaciones no disponibles: falta configuración de búsqueda."},{status:503});
+ const interests=(req.nextUrl.searchParams.get("interests")||"").toLowerCase().split(",").map(s=>s.trim()).filter(Boolean).slice(0,5);
+ const selected=topics.map(t=>({...t,match:interests.reduce((n,v)=>n+(t.key===v||t.terms.some(w=>v.includes(w))?1:0),0)})).sort((a,b)=>b.match-a.match).slice(0,interests.length?2:3);
+ const batches=await Promise.allSettled(selected.map(async t=>{const qs=new URLSearchParams({engine:"amazon",k:t.query,amazon_domain:"amazon.com",api_key:key});const r=await fetch("https://serpapi.com/search.json?"+qs,{next:{revalidate:600},signal:AbortSignal.timeout(15000)});const j=await r.json();if(!r.ok||j.error)throw Error("Provider unavailable");return (Array.isArray(j.organic_results)?j.organic_results:[]).slice(0,12).map((v:Record<string,unknown>,i:number)=>{const title=String(v.title||"");const match=relevance(title,t.terms);const rating=typeof v.rating==="number"?v.rating:null;const score=Math.round(100*(Math.min(match,4)/4*.5+(rating?rating/5*.2:0)+((12-i)/12)*.2+(t.match?0.1:0)));return {id:String(v.asin||""),title,image:typeof v.thumbnail==="string"?v.thumbnail:null,price:typeof v.price==="string"?v.price:null,rating,link:typeof v.link==="string"?v.link:null,source:"Amazon",score,reason:t.match?"Según tus intereses en "+t.key:"Relacionado con "+t.key} as P}).filter((p:P)=>p.title&&p.image) }));
+ const seen=new Set<string>();const products=batches.flatMap(b=>b.status==="fulfilled"?b.value:[]).filter(p=>{const id=p.id||p.title.toLowerCase();if(seen.has(id))return false;seen.add(id);return true}).sort((a,b)=>b.score-a.score).slice(0,12);
+ if(!products.length)return NextResponse.json({message:"No pudimos obtener recomendaciones ahora."},{status:502});
+ return NextResponse.json({products,personalized:interests.length>0,method:"transparent-rule-ranking-v1",notice:"Selección inicial basada en intereses declarados y atributos disponibles; no predice compras."},{headers:{"Cache-Control":"private, max-age=60"}});
+}

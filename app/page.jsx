@@ -81,6 +81,24 @@ export default function Landing() {
       <p className="discover-note">Ejemplos de lo que podés pedir. Disponibilidad y precio sujetos a confirmación.</p>
     </div>
   </section>
+  <section className="journey-section" aria-labelledby="journey-title">
+    <div className="journey-inner">
+      <div className="journey-heading"><p className="eyebrow">DE PRINCIPIO A FIN</p><h2 id="journey-title">No comprás solo.<br/><span>Comprás con Traela.</span></h2><p>Nos ocupamos de tu pedido y te acompañamos hasta que llegue a tus manos.</p></div>
+      <div className="journey-panel">
+        <div className="journey-panel-header"><div><span>ASÍ TE ACOMPAÑAMOS</span><h3>Tu compra, paso a paso.</h3></div><span className="journey-package" aria-hidden="true">✦</span></div>
+        <ol className="journey-timeline">
+          {[
+            ["Confirmamos tu compra","Revisamos juntos el producto y el precio final."],
+            ["Gestionamos tu pedido","Coordinamos la compra y el envío."],
+            ["Te mantenemos al tanto","Te avisamos cómo avanza tu pedido."],
+            ["Coordinamos la entrega","Seguimos con vos hasta que lo recibas."]
+          ].map(([title,description],i)=><li key={title}><span className="journey-marker" aria-hidden="true">{i===3?"⌂":"✓"}</span><div><h4>{title}</h4><p>{description}</p></div></li>)}
+        </ol>
+        <div className="journey-help"><span className="journey-help-icon" aria-hidden="true">✉</span><div><strong>¿Tenés alguna pregunta?</strong><p>Seguimos disponibles por WhatsApp.</p></div></div>
+      </div>
+      <a className="journey-cta" href="https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20hacer%20una%20compra" target="_blank" rel="noopener noreferrer">Empezar mi compra <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
   <section className="faq-section" aria-labelledby="faq-title"><p className="eyebrow">PREGUNTAS FRECUENTES</p><h2 id="faq-title">Todo claro.<br/>Desde el principio.</h2><div className="faq-list">{questions.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
   <section className="closing-section"><Brand/><h2>¿Qué querés<br/>comprar hoy?</h2><Start dark/><p>Precios en guaraníes. Pago vía transferencia bancaria.</p></section>
   <footer className="landing-footer"><div className="footer-box"><div className="footer-about"><Brand small/><h3>Compra como hablás.</h3><p>Tu agente personal de compras.<br/>Hecho para Paraguay.</p><Start dark/></div><div className="footer-links"><h4>Traela</h4><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">Empezar a comprar</a><a href="#como-funciona">Cómo funciona</a><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href="https://instagram.com/traela.app" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div><div className="footer-links"><h4>Información</h4><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos</a><a href="/eliminacion-datos.html">Eliminación de datos</a></div><p className="footer-copyright">© {new Date().getFullYear()} Traela. Todos los derechos reservados.</p></div><div className="footer-wordmark" aria-hidden="true">Traela</div></footer>

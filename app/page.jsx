@@ -21,12 +21,12 @@ export default function Landing() {
     <div className="demo-glow glow-orange"/><div className="demo-glow glow-pink"/>
     <div className="phone">
      <div className="phone-top"><span>9:41</span><span className="phone-island"/><span aria-hidden="true">▮▮▮ ▰</span></div>
-     <div className="phone-header"><span aria-hidden="true">‹</span><div><Brand small/><p>Tu agente de compras</p></div><span aria-hidden="true">···</span></div>
+     <div className="phone-header"><span aria-hidden="true">‹</span><div><Brand small/><p>Tu comprador personal con IA</p></div><span aria-hidden="true">···</span></div>
      <div className="demo-messages"><p className="demo-day">Ejemplo de conversación</p><div className="demo-bubble incoming bubble-one">Hola, soy Traela.<br/>¿Qué querés comprar?</div><div className="demo-bubble outgoing bubble-two">Busco unos auriculares para trabajar.</div><div className="demo-bubble incoming bubble-three">Dale. ¿Preferís inalámbricos? ¿Tenés un presupuesto en mente?</div><div className="demo-bubble outgoing bubble-four">Sí, inalámbricos. Hasta ₲800.000.</div><div className="demo-bubble incoming bubble-five">Perfecto. Busquemos una buena opción para vos.</div></div>
      <div className="demo-composer"><span aria-hidden="true">+</span><span>Decí qué querés…</span><span className="demo-send" aria-hidden="true">↑</span></div><div className="phone-bottom"/>
     </div>
    </div>
-   <div className="hero-copy"><Brand/><h1 id="hero-title">Tu agente personal<br className="desktop-break"/> de compras.</h1><p className="hero-description">Compra lo que quieras.<br/>Empezá con una conversación.</p><Start/><a className="quiet-link" href="#como-funciona">Conocé cómo funciona <span aria-hidden="true">↓</span></a></div>
+   <div className="hero-copy"><Brand/><h1 id="hero-title">Tu comprador personal<br className="desktop-break"/> con IA.</h1><p className="hero-description">Compra lo que quieras.<br/>Empezá con una conversación.</p><Start/><a className="quiet-link" href="#como-funciona">Conocé cómo funciona <span aria-hidden="true">↓</span></a></div>
    <a className="hero-scroll" href="#como-funciona" aria-label="Ver cómo funciona"><span/>Seguí descubriendo</a>
   </section>
   <section className="intro-section" id="como-funciona" aria-labelledby="intro-title"><p className="eyebrow">COMPRA COMO HABLÁS</p><h2 id="intro-title">Vos decís qué querés.<br/><span>Nosotros hacemos el resto.</span></h2><p className="section-description">De la primera pregunta a la puerta de tu casa.</p>

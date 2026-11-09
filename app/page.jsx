@@ -18,14 +18,19 @@ export default function Landing() {
  const [muted,setMuted] = useState(true);
  return <main className="persona-landing">
   <section className="landing-hero" id="inicio" aria-labelledby="hero-title">
-   <div className="hero-demo" aria-label="Ejemplo ilustrativo de una conversación con Traela">
+   <div className="hero-demo" aria-label="Ejemplo ilustrativo de cómo Traela te ayuda a comprar">
     <div className="demo-glow glow-orange"/><div className="demo-glow glow-pink"/>
-    <div className="phone">
-     <div className="phone-top"><span>9:41</span><span className="phone-island"/><span aria-hidden="true">▮▮▮ ▰</span></div>
-     <div className="phone-header"><span aria-hidden="true">‹</span><div><Brand small/><p>Tu comprador personal con IA</p></div><span aria-hidden="true">···</span></div>
-     <div className="demo-messages"><p className="demo-day">Ejemplo de conversación</p><div className="demo-bubble incoming bubble-one">Hola, soy Traela.<br/>¿Qué querés comprar?</div><div className="demo-bubble outgoing bubble-two">Busco unos auriculares para trabajar.</div><div className="demo-bubble incoming bubble-three">Dale. ¿Preferís inalámbricos? ¿Tenés un presupuesto en mente?</div><div className="demo-bubble outgoing bubble-four">Sí, inalámbricos. Hasta ₲800.000.</div><div className="demo-bubble incoming bubble-five">Perfecto. Busquemos una buena opción para vos.</div></div>
-     <div className="demo-composer"><span aria-hidden="true">+</span><span>Decí qué querés…</span><span className="demo-send" aria-hidden="true">↑</span></div><div className="phone-bottom"/>
+    <div className="shopping-preview">
+      <div className="preview-heading"><span className="preview-avatar"><Image src="/traela-logo-new.svg" alt="" width={38} height={38}/></span><span className="preview-heading-copy"><strong>Tu Traela</strong><small>Tu comprador personal con IA</small></span><span className="preview-online"><span/> A tu lado</span></div>
+      <div className="preview-content">
+        <span className="preview-overline">ASÍ DE SIMPLE</span>
+        <div className="preview-message preview-user">Busco unos auriculares inalámbricos para trabajar. Hasta ₲800.000.</div>
+        <div className="preview-message preview-assistant"><span className="preview-sparkle">✦</span><span>Perfecto. Te ayudo a encontrar una buena opción, comparar alternativas y confirmar el precio final en guaraníes.</span></div>
+        <div className="preview-action"><span className="preview-check">✓</span><span><strong>Una compra, sin vueltas.</strong><small>Te acompañamos hasta recibirla.</small></span></div>
+      </div>
+      <div className="preview-footer"><span>¿Qué querés comprar hoy?</span><span className="preview-arrow">↗</span></div>
     </div>
+    <span className="preview-floating-label">Pedí lo que quieras <span>✦</span></span>
    </div>
    <div className="hero-copy"><Brand/><h1 id="hero-title">Tu comprador personal<br className="desktop-break"/> con IA.</h1><p className="hero-description">Compra lo que quieras.<br/>Empezá con una conversación.</p><Start/><a className="quiet-link" href="#como-funciona">Conocé cómo funciona <span aria-hidden="true">↓</span></a></div>
    <a className="hero-scroll" href="#como-funciona" aria-label="Ver cómo funciona"><span/>Seguí descubriendo</a>

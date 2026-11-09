@@ -75,3 +75,26 @@
 @media(max-width:900px) { .landing-hero { padding:75px 30px 90px;gap:25px; }.hero-copy h1 { font-size:45px;margin-left:-10px;margin-right:-10px; }.phone { transform:scale(.9) rotate(-3deg); }.hero-demo { min-height:590px; }.clarity-section { gap:45px; }.footer-box { padding:35px;gap:25px; } }
 @media(max-width:640px) { .landing-hero { grid-template-columns:1fr;gap:15px;padding:50px 24px 80px;min-height:auto; }.hero-copy { grid-row:1;padding-bottom:0; }.hero-copy h1 { font-size:44px;letter-spacing:-2px;margin:27px 0 18px; }.hero-description { font-size:16px;margin-bottom:26px!important; }.landing-brand { font-size:23px; }.hero-demo { min-height:570px;margin-top:20px; }.phone { transform:scale(.86) rotate(-3deg); }.demo-glow { max-width:250px; }.hero-scroll { bottom:15px; }.intro-section { padding:85px 24px 50px; }.persona-landing h2 { font-size:37px;letter-spacing:-1.7px; }.section-description { font-size:16px; }.intro-video { margin-top:35px;border-radius:18px; }.sound-button { top:10px;right:10px;padding:7px 12px;font-size:10px; }.steps { grid-template-columns:1fr;gap:28px;margin-top:40px; }.steps article { border-bottom:1px solid #eee;padding-bottom:25px; }.step-number { margin-bottom:10px; }.steps h3 { font-size:24px; }.clarity-section { grid-template-columns:1fr;padding:65px 24px;gap:40px;margin-top:0; }.faq-section { padding:65px 24px; }.faq-list { margin-top:30px; }.faq-list summary { font-size:16px; }.closing-section { padding:65px 24px 80px; }.landing-footer { padding:0 16px; }.footer-box { grid-template-columns:1fr 1fr;padding:30px 24px;gap:35px 20px;border-radius:24px; }.footer-about { grid-column:1/-1; }.footer-wordmark { font-size:27vw;padding-top:30px; } }
 @media(prefers-reduced-motion:reduce) { .demo-bubble { animation:none; }.start-button,.faq-list summary span { transition:none; } }
+
+
+/* Traela 2026 brand refresh: dark plum, shopping icon wallpaper, coral/magenta and yellow smile */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+.persona-landing,.persona-landing button,.persona-landing input {font-family:'Open Sans',Arial,sans-serif}
+.persona-landing .landing-hero{max-width:none;background:radial-gradient(ellipse at 78% 60%,#690039 0%,transparent 53%),radial-gradient(ellipse at 0% 12%,#401027 0%,transparent 45%),#210619;color:#fff;isolation:isolate}
+.persona-landing .landing-hero::before{content:"";position:absolute;inset:0;background:url('/traela-pattern.svg') center/560px 420px repeat;opacity:.7;pointer-events:none;z-index:-1}
+.persona-landing .landing-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#21061966,#21061911 55%,#21061966);pointer-events:none;z-index:-1}
+.persona-landing .hero-copy h1{font-weight:800;letter-spacing:-.055em;font-size:clamp(42px,4.3vw,68px);line-height:1.07;color:#fff}
+.persona-landing .hero-copy h1::first-line{color:#fff}
+.persona-landing .hero-description{color:#f8dfea;font-weight:500}
+.persona-landing .hero-copy .landing-brand{color:white;font-weight:800}
+.persona-landing .start-button{background:linear-gradient(110deg,#ff6d3a,#fb008f 70%,#b900ec);color:#fff;border-color:#f8699b;box-shadow:0 12px 35px #ff007933;font-weight:700}
+.persona-landing .start-button:hover{box-shadow:0 16px 45px #ff007955}
+.persona-landing .button-chat{background:#ffc400;color:#4b1435}
+.persona-landing .quiet-link,.persona-landing .hero-scroll{color:#ffe2f1}
+.persona-landing .hero-demo .demo-glow.glow-orange{background:#ff682a}
+.persona-landing .hero-demo .demo-glow.glow-pink{background:#e800b4}
+.persona-landing .landing-hero .phone{box-shadow:0 30px 90px #0008,0 0 65px #ed00883b}
+.persona-landing .landing-hero .landing-brand .brand-symbol{filter:drop-shadow(0 0 10px #ff009955)}
+.persona-landing .intro-section .eyebrow{color:#dc007f}
+.persona-landing .closing-section .start-button,.persona-landing .footer-about .start-button{color:white}
+@media(max-width:640px){.persona-landing .landing-hero{background-color:#210619}.persona-landing .landing-hero::before{background-size:390px 293px;opacity:.5}.persona-landing .hero-copy h1{font-size:clamp(36px,9vw,48px);letter-spacing:-.045em}.persona-landing .hero-copy{position:relative;z-index:1}}

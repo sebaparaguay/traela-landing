@@ -39,7 +39,30 @@ export default function Landing() {
    <div className="intro-video"><video src="/videos/traela-intro.mp4" autoPlay muted={muted} loop playsInline controls preload="metadata" aria-label="Video introductorio de Traela"/><button onClick={()=>setMuted(!muted)} className="sound-button">{muted ? 'Activar sonido' : 'Silenciar'}</button></div>
    <div className="steps">{[['01','Contanos.','Describí lo que buscás o pegá un link. Empezamos por lo que necesitás.'],['02','Elegí tranquilo.','Te ayudamos a comparar y confirmamos el precio final en guaraníes.'],['03','Recibilo.','Coordinamos la compra y la entrega. Te acompañamos hasta que llegue.']].map(([n,t,d])=><article key={n}><StepArt number={n}/><span className="step-number">{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div>
   </section>
-  <section className="clarity-section" aria-labelledby="clarity-title"><div><p className="eyebrow">SIN VUELTAS</p><h2 id="clarity-title">Comprar debería<br/>ser así de simple.</h2></div><div className="clarity-items">{[['Un solo precio.','En guaraníes y con todo incluido. Lo confirmamos antes de comprar.'],['Una conversación.','Desde encontrar lo que querés hasta coordinar tu entrega.'],['Alguien de tu lado.','Si necesitás ayuda, podés seguir hablando con nosotros por WhatsApp.']].map(([t,d])=><article key={t}><h3>{t}</h3><p>{d}</p></article>)}</div></section>
+  <section className="clarity-section" aria-labelledby="clarity-title">
+    <div className="clarity-intro">
+      <p className="eyebrow">SIN VUELTAS. SIN SORPRESAS.</p>
+      <h2 id="clarity-title">Comprar afuera.<br/><span>Sentirlo cerca.</span></h2>
+      <p className="clarity-lede">Vos elegís lo que querés. Traela se ocupa de lo complicado, para que comprar sea la parte fácil.</p>
+      <div className="clarity-benefits">
+        <article><span className="clarity-icon" aria-hidden="true">₲</span><div><h3>Un precio. Todo claro.</h3><p>Te confirmamos el total en guaraníes antes de comprar. Sin sorpresas al final.</p></div></article>
+        <article><span className="clarity-icon" aria-hidden="true">✦</span><div><h3>Menos buscar. Mejor elegir.</h3><p>Te ayudamos a encontrar y comparar opciones para decidir con confianza.</p></div></article>
+        <article><span className="clarity-icon" aria-hidden="true">♡</span><div><h3>Estamos hasta que llegue.</h3><p>Coordinamos tu compra y la entrega. Si necesitás algo, seguimos por WhatsApp.</p></div></article>
+      </div>
+      <a className="clarity-link" href="https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20hacer%20una%20compra" target="_blank" rel="noopener noreferrer">Contanos qué querés comprar <span aria-hidden="true">↗</span></a>
+    </div>
+    <div className="clarity-showcase" aria-label="Ejemplo ilustrativo de un resumen de compra de Traela">
+      <div className="clarity-orbit clarity-orbit-one"/><div className="clarity-orbit clarity-orbit-two"/>
+      <div className="clarity-ticket">
+        <div className="ticket-top"><span className="ticket-brand"><Image src="/traela-logo-new.svg" alt="" width={35} height={35}/> traela.</span><span className="ticket-example">EJEMPLO ILUSTRATIVO</span></div>
+        <div className="ticket-main"><span className="ticket-kicker">RESUMEN DE COMPRA</span><h3>Todo lo que querés.<br/>Sin complicarte.</h3><div className="ticket-product"><span className="ticket-product-icon" aria-hidden="true">✦</span><span>Tu producto elegido<small>Buscamos, comparamos y coordinamos.</small></span><span className="ticket-tick" aria-hidden="true">✓</span></div>
+        <div className="ticket-divider"/><div className="ticket-price"><span>Precio final confirmado<small>En guaraníes · Todo incluido</small></span><strong>₲ —</strong></div>
+        <div className="ticket-status"><span className="ticket-status-dot"/> El precio se confirma antes de comprar</div></div>
+        <div className="ticket-bottom"><span aria-hidden="true">↗</span> Del primer mensaje hasta tu puerta.</div>
+      </div>
+      <div className="clarity-floating"><span aria-hidden="true">✓</span> Así de simple.</div>
+    </div>
+  </section>
   <section className="faq-section" aria-labelledby="faq-title"><p className="eyebrow">PREGUNTAS FRECUENTES</p><h2 id="faq-title">Todo claro.<br/>Desde el principio.</h2><div className="faq-list">{questions.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
   <section className="closing-section"><Brand/><h2>¿Qué querés<br/>comprar hoy?</h2><Start dark/><p>Precios en guaraníes. Pago vía transferencia bancaria.</p></section>
   <footer className="landing-footer"><div className="footer-box"><div className="footer-about"><Brand small/><h3>Compra como hablás.</h3><p>Tu agente personal de compras.<br/>Hecho para Paraguay.</p><Start dark/></div><div className="footer-links"><h4>Traela</h4><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">Empezar a comprar</a><a href="#como-funciona">Cómo funciona</a><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href="https://instagram.com/traela.app" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div><div className="footer-links"><h4>Información</h4><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos</a><a href="/eliminacion-datos.html">Eliminación de datos</a></div><p className="footer-copyright">© {new Date().getFullYear()} Traela. Todos los derechos reservados.</p></div><div className="footer-wordmark" aria-hidden="true">Traela</div></footer>

@@ -122,3 +122,31 @@
 .persona-landing .steps .step-number{font-size:12px;letter-spacing:.12em;font-weight:800;color:#d30088;margin-bottom:10px}
 .persona-landing .steps h3{font-weight:750;letter-spacing:-.04em}
 @media(max-width:760px){.persona-landing .steps{grid-template-columns:1fr;gap:18px}.persona-landing .step-art{height:180px}}
+
+/* Hero redesign: device-free shopping concierge preview */
+.persona-landing .hero-demo{min-height:560px;position:relative;isolation:isolate}
+.persona-landing .shopping-preview{width:min(100%,470px);position:relative;z-index:2;border:1px solid #ff80bb66;border-radius:30px;padding:18px;background:linear-gradient(150deg,#3d0a30 0%,#21071e 75%);box-shadow:0 35px 100px #10000e99,0 0 75px #ee008a33;transform:rotate(-2deg);color:#fff}
+.persona-landing .preview-heading{display:flex;align-items:center;gap:11px;padding:5px 4px 18px;border-bottom:1px solid #ffffff22}
+.persona-landing .preview-avatar{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#ffffff12;flex-shrink:0}
+.persona-landing .preview-heading-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.persona-landing .preview-heading-copy strong{font-size:17px;font-weight:800;color:#fff}
+.persona-landing .preview-heading-copy small{font-size:11px;color:#f5c5df}
+.persona-landing .preview-online{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;white-space:nowrap;color:#ffe1ee}
+.persona-landing .preview-online>span{width:7px;height:7px;background:#ffc400;border-radius:50%}
+.persona-landing .preview-content{padding:27px 5px 22px;display:flex;flex-direction:column;gap:19px}
+.persona-landing .preview-overline{font-size:10px;letter-spacing:.18em;font-weight:800;color:#ffbdde}
+.persona-landing .preview-message{font-size:15px;line-height:1.55;padding:16px 18px;border-radius:20px;max-width:92%;color:#fff}
+.persona-landing .preview-user{align-self:flex-end;background:#ffffff19;border:1px solid #ffffff2b;border-bottom-right-radius:5px}
+.persona-landing .preview-assistant{display:flex;gap:11px;align-self:flex-start;background:linear-gradient(120deg,#ff5b40,#ee008c 78%,#b400df);border-bottom-left-radius:5px;box-shadow:0 12px 35px #e0007633}
+.persona-landing .preview-sparkle{font-size:19px;color:#ffda21;flex-shrink:0}
+.persona-landing .preview-action{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #ffffff22;border-radius:16px;background:#ffffff0c;color:#fff}
+.persona-landing .preview-check{display:grid;place-items:center;background:#ffc400;color:#3a092a;border-radius:12px;width:34px;height:34px;font-size:20px;font-weight:900;flex-shrink:0}
+.persona-landing .preview-action>span:last-child{display:flex;flex-direction:column;gap:3px}
+.persona-landing .preview-action strong{font-size:13px;color:#fff}
+.persona-landing .preview-action small{font-size:11px;color:#f1c5dc}
+.persona-landing .preview-footer{border:1px solid #ff5ba9a8;border-radius:17px;padding:13px 14px 13px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:#fce5f2;background:#130613}
+.persona-landing .preview-arrow{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#ffc400;color:#2c0923;font-size:20px}
+.persona-landing .preview-floating-label{position:absolute;z-index:3;bottom:20px;right:0;background:#ffc400;color:#2c0923;font-weight:800;font-size:12px;border-radius:30px;padding:11px 16px;box-shadow:0 10px 30px #0004;transform:rotate(5deg)}
+.persona-landing .preview-floating-label span{color:#d00086;margin-left:5px}
+@media(max-width:900px){.persona-landing .hero-demo{min-height:500px}.persona-landing .shopping-preview{max-width:420px}}
+@media(max-width:640px){.persona-landing .hero-demo{min-height:470px}.persona-landing .shopping-preview{transform:none;width:100%;padding:13px;border-radius:24px}.persona-landing .preview-message{font-size:13px}.persona-landing .preview-content{padding:20px 2px}.persona-landing .preview-floating-label{right:0;bottom:0;font-size:10px}}

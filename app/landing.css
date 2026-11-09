@@ -112,3 +112,13 @@
 .persona-landing .landing-hero::after{background:radial-gradient(ellipse at 55% 50%,#28001c22 0%,#21051955 85%)!important}
 .persona-landing .hero-copy{background:radial-gradient(ellipse,#210519d9 0%,#21051977 62%,transparent 85%);border-radius:36px;padding:32px 8px}
 @media(max-width:640px){.persona-landing .landing-hero::before{background-size:310px 233px!important;opacity:.65!important}.persona-landing .hero-copy{padding:18px 4px}}
+
+/* Branded three-step illustrations */
+.persona-landing .steps{gap:22px;align-items:stretch}
+.persona-landing .steps article{min-width:0;border:1px solid #f3e4ec;border-radius:24px;padding:16px 20px 28px;background:linear-gradient(180deg,#fff8fc,#fff 73%);box-shadow:0 14px 35px #3a001108;transition:transform .2s ease,box-shadow .2s ease}
+.persona-landing .steps article:hover{transform:translateY(-4px);box-shadow:0 20px 40px #3a001112}
+.persona-landing .step-art{height:190px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:radial-gradient(ellipse at 50% 95%,#6e1248 0%,#300a27 75%);overflow:hidden;margin-bottom:23px}
+.persona-landing .step-art svg{display:block;width:100%;max-width:310px;height:100%}
+.persona-landing .steps .step-number{font-size:12px;letter-spacing:.12em;font-weight:800;color:#d30088;margin-bottom:10px}
+.persona-landing .steps h3{font-weight:750;letter-spacing:-.04em}
+@media(max-width:760px){.persona-landing .steps{grid-template-columns:1fr;gap:18px}.persona-landing .step-art{height:180px}}

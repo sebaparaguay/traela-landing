@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import Script from "next/script";
+
 declare global { interface Window { posthog?: { init:(key:string,options:Record<string,unknown>)=>void; capture:(name:string,properties?:Record<string,unknown>)=>void; }; __traelaPosthogInitialized?:boolean } }
 const key=process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const host=process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";

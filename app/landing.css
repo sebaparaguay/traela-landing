@@ -150,3 +150,47 @@
 .persona-landing .preview-floating-label span{color:#d00086;margin-left:5px}
 @media(max-width:900px){.persona-landing .hero-demo{min-height:500px}.persona-landing .shopping-preview{max-width:420px}}
 @media(max-width:640px){.persona-landing .hero-demo{min-height:470px}.persona-landing .shopping-preview{transform:none;width:100%;padding:13px;border-radius:24px}.persona-landing .preview-message{font-size:13px}.persona-landing .preview-content{padding:20px 2px}.persona-landing .preview-floating-label{right:0;bottom:0;font-size:10px}}
+
+/* Traela value proposition: editorial copy + tangible illustrated purchase summary */
+.persona-landing .clarity-section{max-width:1280px;margin:50px auto 0;padding:110px 55px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;overflow:visible}
+.persona-landing .clarity-intro .eyebrow{color:#d50088;font-weight:800;margin-bottom:24px!important}
+.persona-landing .clarity-intro h2{font-size:clamp(40px,4.2vw,64px);line-height:1.06;font-weight:800;letter-spacing:-.06em}
+.persona-landing .clarity-intro h2 span{background:linear-gradient(100deg,#ff6b36,#ee008b 65%,#ad00d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.persona-landing .clarity-lede{font-size:17px;line-height:1.7;color:#68616a;margin-top:25px!important;max-width:510px}
+.persona-landing .clarity-benefits{margin-top:38px;display:flex;flex-direction:column;gap:0}
+.persona-landing .clarity-benefits article{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid #eee6eb}
+.persona-landing .clarity-icon{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:14px;background:#fff0f7;color:#c90080;font-weight:800;font-size:22px}
+.persona-landing .clarity-benefits h3{font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.persona-landing .clarity-benefits p{font-size:14px;line-height:1.65;color:#756b73}
+.persona-landing .clarity-link{display:inline-flex;align-items:center;gap:18px;margin-top:30px;background:#240a20;color:#fff;border-radius:50px;padding:15px 21px;font-size:14px;font-weight:750;transition:transform .2s}
+.persona-landing .clarity-link:hover{transform:translateY(-3px)}
+.persona-landing .clarity-link span{color:#ffc400;font-size:21px}
+.persona-landing .clarity-showcase{position:relative;min-height:600px;border-radius:40px;background:radial-gradient(ellipse at 20% 15%,#6a184a 0%,transparent 55%),radial-gradient(ellipse at 90% 85%,#7b004c 0%,transparent 55%),#25071e;display:grid;place-items:center;padding:55px 30px;isolation:isolate;overflow:hidden}
+.persona-landing .clarity-showcase::before{content:"";position:absolute;inset:0;background:url('/traela-pattern.svg') center/440px repeat;opacity:.22;z-index:-1}
+.persona-landing .clarity-orbit{position:absolute;border-radius:50%;filter:blur(50px);opacity:.45;pointer-events:none}
+.persona-landing .clarity-orbit-one{width:210px;height:210px;top:0;right:-45px;background:#f500a3}
+.persona-landing .clarity-orbit-two{width:190px;height:190px;bottom:0;left:-40px;background:#ff6b31}
+.persona-landing .clarity-ticket{position:relative;z-index:1;width:min(100%,400px);background:#fff;border-radius:25px;overflow:hidden;box-shadow:0 30px 80px #10000f8c;transform:rotate(-3deg)}
+.persona-landing .ticket-top{padding:22px 25px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid #f4e9ee}
+.persona-landing .ticket-brand{display:flex;align-items:center;gap:7px;font-weight:800;font-size:22px;color:#251324;letter-spacing:-.06em}
+.persona-landing .ticket-example{font-size:8px;font-weight:800;letter-spacing:.07em;color:#aa7d98;text-align:right}
+.persona-landing .ticket-main{padding:30px 26px}
+.persona-landing .ticket-kicker{color:#d00083;font-weight:800;font-size:10px;letter-spacing:.13em}
+.persona-landing .ticket-main h3{font-size:clamp(24px,2.3vw,32px);line-height:1.13;letter-spacing:-.055em;font-weight:800;margin:12px 0 25px}
+.persona-landing .ticket-product{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:#fff3f9}
+.persona-landing .ticket-product-icon{width:45px;height:45px;border-radius:13px;display:grid;place-items:center;color:#fff;font-size:27px;background:linear-gradient(130deg,#ff6b35,#f000a3)}
+.persona-landing .ticket-product>span:nth-child(2){font-size:13px;font-weight:800;flex:1}
+.persona-landing .ticket-product small,.persona-landing .ticket-price small{display:block;font-size:10px;font-weight:500;color:#7f6c79;margin-top:5px}
+.persona-landing .ticket-tick{font-size:18px;color:#d00083}
+.persona-landing .ticket-divider{border-top:2px dashed #e7d6e0;margin:26px 0}
+.persona-landing .ticket-price{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.persona-landing .ticket-price>span{font-size:13px;font-weight:800}
+.persona-landing .ticket-price strong{font-size:27px;color:#d00083;white-space:nowrap}
+.persona-landing .ticket-status{display:flex;align-items:center;gap:8px;font-size:10px;color:#765c6c;margin-top:24px}
+.persona-landing .ticket-status-dot{width:8px;height:8px;border-radius:50%;background:#e90095}
+.persona-landing .ticket-bottom{background:linear-gradient(100deg,#ff6c35,#f00091,#b900d9);padding:17px 22px;text-align:center;color:#fff;font-weight:800;font-size:12px}
+.persona-landing .ticket-bottom span{font-size:18px;margin-right:8px}
+.persona-landing .clarity-floating{position:absolute;z-index:2;right:6px;bottom:55px;transform:rotate(7deg);background:#ffc400;color:#2b0822;border-radius:30px;padding:12px 17px;font-weight:800;font-size:13px;box-shadow:0 15px 35px #0004}
+.persona-landing .clarity-floating span{margin-right:7px}
+@media(max-width:900px){.persona-landing .clarity-section{grid-template-columns:1fr;gap:35px;padding:75px 28px}.persona-landing .clarity-showcase{min-height:540px}}
+@media(max-width:550px){.persona-landing .clarity-section{padding:65px 18px}.persona-landing .clarity-showcase{padding:36px 20px;min-height:500px;border-radius:28px}.persona-landing .clarity-ticket{transform:rotate(-1deg)}.persona-landing .clarity-floating{right:6px;bottom:15px}.persona-landing .ticket-main{padding:23px 20px}.persona-landing .ticket-top{padding:17px 20px}}

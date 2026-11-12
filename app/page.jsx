@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './landing.css';
 
 function Brand({small=false}) { return <span className={`landing-brand ${small ? 'small' : ''}`}><span className="brand-symbol"><Image src="/traela-logo-new.svg" alt="" width={64} height={64}/></span><span>Traela</span></span>; }
-function Start({dark=false}) {return <Link className={`start-button ${dark ? 'dark' : ''}`} href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer"><span className="button-chat" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 2v-10a9 9 0 0 1 18 0Z" fill="currentColor"/><path d="M7 11h7M7 14h5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg></span>Empezar a comprar<svg className="button-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>;}
+function Start({dark=false}) {return <Link className={`start-button ${dark ? 'dark' : ''}`} href="/chat"><span className="button-chat" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 2v-10a9 9 0 0 1 18 0Z" fill="currentColor"/><path d="M7 11h7M7 14h5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg></span>Empezar a comprar<svg className="button-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>;}
 const questions = [
  ['¿Qué hace Traela?', 'Nos contás qué querés comprar. Buscamos opciones, confirmamos el precio final y coordinamos la compra y la entrega en Paraguay.'],
  ['¿Necesito tener un link?', 'No. Podés describir lo que buscás o pegar un link en el chat. Si querés enviarnos una foto, continuá con nosotros por WhatsApp.'],
@@ -16,6 +16,8 @@ const questions = [
 function StepArt({number}){return <div className={"step-art step-art-"+number} aria-hidden="true"><svg viewBox="0 0 320 220" fill="none"><defs><linearGradient id={"grad"+number} x1="0" y1="0" x2="1" y2="1"><stop stopColor="#ff7939"/><stop offset=".5" stopColor="#ff008b"/><stop offset="1" stopColor="#bd00e8"/></linearGradient></defs>{number==="01"?<><rect x="45" y="30" width="230" height="160" rx="25" fill="#2b0924" stroke="#a82c72" strokeWidth="3"/><rect x="65" y="50" width="130" height="18" rx="9" fill="#9e315f"/><rect x="65" y="83" width="170" height="53" rx="18" fill={"url(#grad"+number+")"}/><path d="M85 103h125m-125 16h88" stroke="white" strokeWidth="5" strokeLinecap="round"/><rect x="115" y="150" width="125" height="19" rx="9" fill="#703353"/><circle cx="258" cy="159" r="29" fill="#ffc400"/><path d="m245 159 10 10 19-23" stroke="#46112c" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/></>:number==="02"?<><rect x="28" y="45" width="126" height="132" rx="20" fill="#2b0924" stroke="#a82c72" strokeWidth="3"/><rect x="166" y="45" width="126" height="132" rx="20" fill="#2b0924" stroke="#a82c72" strokeWidth="3"/><path d="M56 112q20-42 43-18l28 20 12 2-8 20H51z" fill={"url(#grad"+number+")"}/><path d="m75 101 14 10m-5-18 14 10" stroke="#ffd7e7" strokeWidth="4"/><rect x="180" y="80" width="98" height="55" rx="12" fill={"url(#grad"+number+")"}/><path d="M195 99h68m-68 15h43" stroke="white" strokeWidth="5" strokeLinecap="round"/><circle cx="160" cy="159" r="32" fill="#ffc400"/><path d="m146 159 10 10 22-24" stroke="#46112c" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/></>:<><path d="m77 86 82-40 84 40-84 42z" fill={"url(#grad"+number+")"}/><path d="M77 86v74l82 41v-73z" fill="#df008c"/><path d="M243 86v74l-84 41v-73z" fill="#900078"/><path d="m116 67 85 41v28" stroke="#ffbadc" strokeWidth="7"/><circle cx="244" cy="54" r="32" fill="#ffc400"/><path d="m230 54 10 10 21-24" stroke="#46112c" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/><path d="m40 63 15-14m-15 37H23m230 95 15 14" stroke="#ff9a3d" strokeWidth="5" strokeLinecap="round"/></>}</svg></div>}
 export default function Landing() {
  const [muted,setMuted] = useState(true);
+ const [shoppingRequest,setShoppingRequest] = useState('');
+ const startShopping=(event)=>{event.preventDefault();const q=shoppingRequest.trim();window.location.assign('/chat'+(q?'?q='+encodeURIComponent(q):''));};
  return <main className="persona-landing">
   <section className="landing-hero" id="inicio" aria-labelledby="hero-title">
    <div className="hero-demo" aria-label="Ejemplo ilustrativo de cómo Traela te ayuda a comprar">
@@ -32,7 +34,7 @@ export default function Landing() {
     </div>
     <span className="preview-floating-label">Pedí lo que quieras <span>✦</span></span>
    </div>
-   <div className="hero-copy"><Brand/><h1 id="hero-title">Tu comprador personal<br className="desktop-break"/> con IA.</h1><p className="hero-description">Compra lo que quieras.<br/>Empezá con una conversación.</p><Start/><a className="quiet-link" href="#como-funciona">Conocé cómo funciona <span aria-hidden="true">↓</span></a></div>
+   <div className="hero-copy"><Brand/><h1 id="hero-title">Tu comprador personal<br className="desktop-break"/> con IA.</h1><p className="hero-description">Compra lo que quieras.<br/>Empezá con una conversación.</p><form className="hero-shopping-form" onSubmit={startShopping} role="search" aria-label="Empezar una compra con Traela"><label htmlFor="hero-shopping-request">¿Qué querés comprar hoy?</label><div className="hero-shopping-field"><input id="hero-shopping-request" value={shoppingRequest} onChange={e=>setShoppingRequest(e.target.value)} placeholder="Describí un producto o pegá un link..." autoComplete="off"/><button type="submit" aria-label="Empezar conversación">↗</button></div><div className="hero-shopping-prompts">{[['Zapatillas','Quiero unas zapatillas para correr'],['Tecnología','Busco auriculares inalámbricos'],['Regalos','Necesito ayuda para elegir un regalo']].map(([label,prompt])=><button key={label} type="button" onClick={()=>{setShoppingRequest(prompt);window.location.assign('/chat?q='+encodeURIComponent(prompt));}}>{label} ↗</button>)}</div><p className="hero-shopping-note">Buscamos por vos · Precio final en guaraníes · Entrega en Paraguay</p></form><a className="quiet-link" href="#como-funciona">Conocé cómo funciona <span aria-hidden="true">↓</span></a></div>
    <a className="hero-scroll" href="#como-funciona" aria-label="Ver cómo funciona"><span/>Seguí descubriendo</a>
   </section>
   <section className="intro-section" id="como-funciona" aria-labelledby="intro-title"><p className="eyebrow">COMPRA COMO HABLÁS</p><h2 id="intro-title">Vos decís qué querés.<br/><span>Nosotros hacemos el resto.</span></h2><p className="section-description">De la primera pregunta a la puerta de tu casa.</p>
@@ -63,42 +65,7 @@ export default function Landing() {
       <div className="clarity-floating"><span aria-hidden="true">✓</span> Así de simple.</div>
     </div>
   </section>
-  <section className="discover-section" aria-labelledby="discover-title">
-    <div className="discover-inner">
-      <div className="discover-heading"><p className="eyebrow">¿QUÉ TENÉS EN MENTE?</p><h2 id="discover-title">Lo que quieras.<br/><span>En un mensaje.</span></h2><p>Desde algo que viste en internet hasta eso que no encontrás en Paraguay.</p></div>
-      <div className="discover-grid">
-        {[
-          {name:"Esas zapatillas.",category:"Running y deporte",symbol:"👟",style:"running",message:"Hola Traela, quiero comprar unas zapatillas deportivas."},
-          {name:"Esos auriculares.",category:"Tecnología",symbol:"🎧",style:"tech",message:"Hola Traela, quiero comprar unos auriculares."},
-          {name:"Tu rutina favorita.",category:"Belleza y cuidado",symbol:"🧴",style:"beauty",message:"Hola Traela, quiero comprar productos de belleza y cuidado."},
-          {name:"Ese regalo perfecto.",category:"Regalos y más",symbol:"🎁",style:"gifts",message:"Hola Traela, necesito ayuda para elegir y comprar un regalo."}
-        ].map((item)=><a className="discover-card" key={item.style} href={`https://wa.me/595971255083?text=${encodeURIComponent(item.message)}`} target="_blank" rel="noopener noreferrer" aria-label={`Consultar por WhatsApp: ${item.category}`}>
-          <div className={`discover-visual discover-${item.style}`}><span className="discover-object" aria-hidden="true">{item.symbol}</span><span className="discover-card-arrow" aria-hidden="true">↗</span></div>
-          <div className="discover-card-copy"><h3>{item.name}</h3><p>{item.category}</p></div>
-        </a>)}
-      </div>
-      <div className="discover-bottom"><p>¿No sabés exactamente cuál elegir? También te ayudamos con eso.</p><a href="https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20que%20me%20ayuden%20a%20encontrar%20un%20producto." target="_blank" rel="noopener noreferrer">Contanos qué buscás <span aria-hidden="true">↗</span></a></div>
-      <p className="discover-note">Ejemplos de lo que podés pedir. Disponibilidad y precio sujetos a confirmación.</p>
-    </div>
-  </section>
-  <section className="journey-section" aria-labelledby="journey-title">
-    <div className="journey-inner">
-      <div className="journey-heading"><p className="eyebrow">DE PRINCIPIO A FIN</p><h2 id="journey-title">No comprás solo.<br/><span>Comprás con Traela.</span></h2><p>Nos ocupamos de tu pedido y te acompañamos hasta que llegue a tus manos.</p></div>
-      <div className="journey-panel">
-        <div className="journey-panel-header"><div><span>ASÍ TE ACOMPAÑAMOS</span><h3>Tu compra, paso a paso.</h3></div><span className="journey-package" aria-hidden="true">✦</span></div>
-        <ol className="journey-timeline">
-          {[
-            ["Confirmamos tu compra","Revisamos juntos el producto y el precio final."],
-            ["Gestionamos tu pedido","Coordinamos la compra y el envío."],
-            ["Te mantenemos al tanto","Te avisamos cómo avanza tu pedido."],
-            ["Coordinamos la entrega","Seguimos con vos hasta que lo recibas."]
-          ].map(([title,description],i)=><li key={title}><span className="journey-marker" aria-hidden="true">{i===3?"⌂":"✓"}</span><div><h4>{title}</h4><p>{description}</p></div></li>)}
-        </ol>
-        <div className="journey-help"><span className="journey-help-icon" aria-hidden="true">✉</span><div><strong>¿Tenés alguna pregunta?</strong><p>Seguimos disponibles por WhatsApp.</p></div></div>
-      </div>
-      <a className="journey-cta" href="https://wa.me/595971255083?text=Hola%20Traela%2C%20quiero%20hacer%20una%20compra" target="_blank" rel="noopener noreferrer">Empezar mi compra <span aria-hidden="true">↗</span></a>
-    </div>
-  </section>
+  <section className="trust-section" aria-labelledby="trust-title"><div className="trust-inner"><p className="eyebrow">EXPERIENCIA REAL</p><h2 id="trust-title">Más de 100 pedidos.<br/><span>Una forma más simple de comprar.</span></h2><p>Traela ya acompañó compras reales en Paraguay. Cada pedido nos ayuda a entender mejor lo que buscás y a mejorar cómo te acompañamos.</p><div className="trust-stats"><article><strong>100+</strong><span>Pedidos gestionados</span></article><article><strong>30–40</strong><span>Clientes que confiaron en Traela</span></article><article><strong>De principio a fin</strong><span>Atención durante la compra y la entrega</span></article></div><p className="trust-footnote">Cifras aproximadas del historial de Traela, sujetas a actualización. No son reseñas ni testimonios de terceros.</p><Link className="trust-action" href="/chat">Empezar mi compra <span aria-hidden="true">↗</span></Link></div></section>
   <section className="faq-section" aria-labelledby="faq-title"><p className="eyebrow">PREGUNTAS FRECUENTES</p><h2 id="faq-title">Todo claro.<br/>Desde el principio.</h2><div className="faq-list">{questions.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
   <section className="closing-section"><Brand/><h2>¿Qué querés<br/>comprar hoy?</h2><Start dark/><p>Precios en guaraníes. Pago vía transferencia bancaria.</p></section>
   <footer className="landing-footer"><div className="footer-box"><div className="footer-about"><Brand small/><h3>Compra como hablás.</h3><p>Tu agente personal de compras.<br/>Hecho para Paraguay.</p><Start dark/></div><div className="footer-links"><h4>Traela</h4><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">Empezar a comprar</a><a href="#como-funciona">Cómo funciona</a><a href="https://wa.me/595971255083" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href="https://instagram.com/traela.app" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div><div className="footer-links"><h4>Información</h4><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos</a><a href="/eliminacion-datos.html">Eliminación de datos</a></div><p className="footer-copyright">© {new Date().getFullYear()} Traela. Todos los derechos reservados.</p></div><div className="footer-wordmark" aria-hidden="true">Traela</div></footer>

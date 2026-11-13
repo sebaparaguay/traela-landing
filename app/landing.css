@@ -319,3 +319,8 @@
 .persona-landing .voice-time{font-size:10px;opacity:.9}.persona-landing .voice-transcript{font-size:11px;line-height:1.55;opacity:.95}
 @media(max-width:700px){.persona-landing .hero-mode-tabs{gap:2px;margin-bottom:14px}.persona-landing .hero-mode-tabs button{font-size:11px;padding:9px 10px}.persona-landing .screenshot-product{height:80px;font-size:48px}}
 @media(prefers-reduced-motion:reduce){.persona-landing .shopping-preview{animation:none}}
+
+/* Refinements: controls beneath illustration; borderless floating glass nav */
+.persona-landing .site-nav{border:0;box-shadow:0 14px 40px #18001526;background:rgba(38,9,33,.46)}
+.persona-landing .hero-mode-tabs{margin-top:22px;margin-bottom:0}
+@media(max-width:800px){.persona-landing .site-nav{border:0}.persona-landing .hero-mode-tabs{margin-top:16px;margin-bottom:0}}

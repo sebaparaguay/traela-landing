@@ -324,3 +324,12 @@
 .persona-landing .site-nav{border:0;box-shadow:0 14px 40px #18001526;background:rgba(38,9,33,.46)}
 .persona-landing .hero-mode-tabs{margin-top:22px;margin-bottom:0}
 @media(max-width:800px){.persona-landing .site-nav{border:0}.persona-landing .hero-mode-tabs{margin-top:16px;margin-bottom:0}}
+
+/* Hero layout: keep the floating navbar clear of the preview, and label readable */
+.persona-landing .landing-hero{padding-top:clamp(142px,13vh,176px);padding-bottom:100px;min-height:100svh}
+.persona-landing .hero-demo{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0;gap:0;padding-top:12px}
+.persona-landing .shopping-preview{flex:none;width:min(100%,470px)}
+.persona-landing .preview-floating-label{position:relative;bottom:auto;right:auto;align-self:flex-end;margin:-5px 8px 0 0;z-index:4;transform:rotate(4deg);white-space:nowrap;line-height:1.2}
+.persona-landing .hero-mode-tabs{flex:none;align-self:center;margin:23px 0 0;z-index:3}
+@media(max-width:900px){.persona-landing .landing-hero{padding-top:132px}.persona-landing .hero-demo{min-height:0}}
+@media(max-width:640px){.persona-landing .landing-hero{padding-top:110px;padding-bottom:85px}.persona-landing .hero-demo{min-height:0;margin-top:12px;padding-top:0}.persona-landing .preview-floating-label{position:relative;bottom:auto;right:auto;align-self:flex-end;margin:10px 4px 0 0;font-size:11px}.persona-landing .hero-mode-tabs{margin-top:18px}}

@@ -298,3 +298,24 @@
 .persona-landing section[id]{scroll-margin-top:105px}
 @media(max-width:800px){.persona-landing .site-nav{top:12px;width:calc(100% - 24px);border-radius:28px}.persona-landing .site-nav-inner{min-height:62px;padding:0 16px}.persona-landing .landing-hero{padding-top:0}.persona-landing .site-nav-links{top:calc(100% + 8px);left:0;right:0;border:1px solid #ffffff45;border-radius:20px;background:rgba(38,9,33,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);overflow:hidden}}
 @media(max-width:400px){.persona-landing .site-nav{border-radius:24px}}
+
+/* Three shopping modes in hero illustration */
+.persona-landing .hero-mode-tabs{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:6px;padding:5px;border:1px solid #efc6db;border-radius:999px;background:#fffdfded;box-shadow:0 8px 30px #5a12351a;margin-bottom:20px}
+.persona-landing .hero-mode-tabs button{font:600 12px 'Open Sans',Arial,sans-serif;border:0;background:transparent;color:#7b5470;padding:10px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.persona-landing .hero-mode-tabs button.active{background:#3a1030;color:#fff;box-shadow:0 3px 10px #2a082122}
+.persona-landing .hero-mode-tabs button:focus-visible{outline:3px solid #e33d96;outline-offset:2px}
+.persona-landing .hero-demo{align-content:center}
+.persona-landing .shopping-preview{animation:hero-preview-appear .3s ease both}
+@keyframes hero-preview-appear{from{opacity:.55;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.persona-landing .preview-media-message{display:flex;flex-direction:column;gap:9px}
+.persona-landing .preview-screenshot{width:210px;max-width:100%;border-radius:13px;background:#fff;color:#36132b;padding:8px;box-shadow:0 5px 20px #2c0a221e}
+.persona-landing .screenshot-toolbar{display:flex;justify-content:space-between;align-items:center;font-size:8px;font-weight:800;color:#947e8b}
+.persona-landing .screenshot-product{display:grid;place-items:center;height:105px;background:linear-gradient(145deg,#f8e6ed,#f0d7e8);border-radius:9px;margin:7px 0;font-size:64px}
+.persona-landing .screenshot-lines{display:flex;flex-direction:column;gap:4px}
+.persona-landing .screenshot-lines i{height:5px;width:85%;border-radius:9px;background:#e5d7df}.persona-landing .screenshot-lines i:nth-child(2){width:62%}.persona-landing .screenshot-lines i:nth-child(3){width:35%;background:#f3a1c6}
+.persona-landing .preview-voice-note{display:flex;align-items:center;gap:9px;background:#ffffff2b;border-radius:14px;padding:10px 11px;width:240px;max-width:100%}
+.persona-landing .voice-play{display:grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background:#fff;color:#d51c86;font-size:12px}
+.persona-landing .voice-wave{display:flex;align-items:center;gap:2px;flex:1;height:35px}.persona-landing .voice-wave i{display:block;width:3px;flex:1;min-width:2px;border-radius:5px;background:#fff;opacity:.85}
+.persona-landing .voice-time{font-size:10px;opacity:.9}.persona-landing .voice-transcript{font-size:11px;line-height:1.55;opacity:.95}
+@media(max-width:700px){.persona-landing .hero-mode-tabs{gap:2px;margin-bottom:14px}.persona-landing .hero-mode-tabs button{font-size:11px;padding:9px 10px}.persona-landing .screenshot-product{height:80px;font-size:48px}}
+@media(prefers-reduced-motion:reduce){.persona-landing .shopping-preview{animation:none}}

@@ -388,3 +388,11 @@
 @media(max-width:800px){.persona-landing .buyer-journey-stage{grid-template-columns:1fr;gap:15px;min-height:0}.persona-landing .buyer-journey-copy{padding:8px}.persona-landing .buyer-journey-copy h3{font-size:30px}.persona-landing .buyer-journey-copy p{font-size:13px}.persona-landing .buyer-journey-art{height:420px}.persona-landing .buyer-journey{padding:18px}.persona-landing .buyer-journey-footnote{margin-top:12px}}
 @media(max-width:640px){.persona-landing .buyer-journey{margin-top:35px;padding:13px;border-radius:24px}.persona-landing .buyer-journey-stage{display:flex;flex-direction:column;align-items:stretch}.persona-landing .buyer-journey-copy{min-height:280px}.persona-landing .buyer-journey-copy h3{font-size:27px;margin:12px 0}.persona-landing .buyer-journey-art{height:390px}.persona-landing .buyer-art-scene{padding:14px;gap:10px}.persona-landing .buyer-art-pdp-visual{min-height:145px;font-size:54px}.persona-landing .buyer-art-pdp-info strong{font-size:15px}.persona-landing .buyer-art-pdp-info span{font-size:10px}.persona-landing .buyer-art-pdp{gap:8px}.persona-landing .buyer-journey-controls>button{padding:11px 13px;font-size:12px}.persona-landing .buyer-journey-dots{gap:5px}}
 @media(prefers-reduced-motion:reduce){.persona-landing .buyer-journey-art{animation:none}}
+
+/* Real-world WhatsApp journey: conversational cards stay legible */
+.persona-landing .buyer-journey-art{height:475px}
+.persona-landing .buyer-art-scene{overflow-y:auto;scrollbar-width:thin;justify-content:flex-start}
+.persona-landing .buyer-art-pdp{flex-shrink:0}
+.persona-landing .buyer-art-pdp-visual{min-height:170px}
+.persona-landing .buyer-art-source{flex-shrink:0}
+@media(max-width:640px){.persona-landing .buyer-journey-art{height:430px}.persona-landing .buyer-art-pdp-visual{min-height:145px}}
